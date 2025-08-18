@@ -13,7 +13,7 @@
       --bg:#fffaf6;
       --muted:#6b6b6b;
       --text:#222;
-      --card:#fff;
+      --card:#ffffff;
       --radius:12px;
       --container:1100px;
     }
@@ -24,37 +24,35 @@
     a{color:inherit;text-decoration:none}
     .wrap{max-width:var(--container);margin:0 auto;padding:0 16px}
 
-    /* HEADER wrapper (keeps brand centered) */
+    /* HEADER with centered FSSAI */
     header{
       position:relative;
       background:white;
       border-bottom:1px solid rgba(0,0,0,0.06);
-      padding:14px 0 10px;
+      padding:10px 0;
       z-index:80;
     }
-    /* FSSAI top-left */
-    .fssai-corner{
-      position:absolute;
-      left:10px;
-      top:10px;
+    .header-center{
       display:flex;
       align-items:center;
-      gap:6px;
-      pointer-events:auto;
-      z-index:90;
+      justify-content:center;
+      gap:10px;
+      min-height:56px;
     }
-    .fssai-corner img{height:40px;width:auto;display:block}
-    .fssai-corner .id{font-size:11px;color:var(--muted);font-weight:700}
-
-    /* Brand centered */
-    .brand-center{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
-    .brand-center .name{font-weight:700;font-size:1.05rem;line-height:1}
-    .brand-center .tag{font-size:.86rem;color:var(--muted);margin-top:4px}
+    .fssai-logo{
+      height:36px; width:auto; display:block;
+    }
+    .fssai-id{
+      font-weight:700;
+      color:var(--muted);
+      font-size:13px;
+      letter-spacing:0.2px;
+    }
 
     /* NAV RIBBON (sticky) */
     .nav-ribbon{
       position:sticky;
-      top:0; /* sticks to top of viewport when it reaches there */
+      top:0;
       z-index:85;
       background:#fff;
       border-bottom:1px solid rgba(0,0,0,0.06);
@@ -72,24 +70,26 @@
       color:var(--muted);
     }
     .nav-ribbon a:hover{background:rgba(0,0,0,0.04)}
+    .nav-ribbon a.active{background:var(--brand);color:white}
 
     /* HERO */
     .hero{background:linear-gradient(180deg,var(--brand),var(--accent));color:#1a130f;padding:28px 0 22px;border-bottom-left-radius:18px;border-bottom-right-radius:18px}
     .hero-inner{display:flex;gap:18px;align-items:center;max-width:var(--container);margin:0 auto;padding:0 16px}
-    .hero-left{flex:1;text-align:center} /* center title always */
+    .hero-left{flex:1;text-align:center}
     .hero-left h1{font-size:clamp(1.6rem,6vw,2.4rem);margin:0;font-weight:700;line-height:1}
     .hero-left p{margin:8px 0 14px;color:#2b1f19;font-weight:600}
     .cta-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
     .btn{background:#000;color:white;padding:10px 14px;border-radius:10px;font-weight:700;display:inline-block}
     .btn.outline{background:transparent;color:#000;border:2px solid rgba(0,0,0,0.06)}
-
     .hero-right{width:200px;border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.12)}
     .hero-right img{width:100%;height:170px;object-fit:cover}
 
-    /* Mobile-first product showcase */
+    /* SECTION basics */
     .section{padding:22px 0}
     .section h2{font-size:1.1rem;margin:0 0 12px}
-    .products-scroll{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x mandatory}
+
+    /* Product showcase - mobile first */
+    .products-scroll{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
     .product-card{min-width:68%;flex:0 0 68%;background:var(--card);border-radius:12px;padding:10px;box-shadow:0 8px 24px rgba(0,0,0,0.06);scroll-snap-align:center}
     .product-card img{border-radius:10px;height:150px;object-fit:cover}
     .product-name{font-weight:700;margin:8px 0 6px}
@@ -125,7 +125,7 @@
     .contact-grid{display:grid;grid-template-columns:1fr;gap:12px}
     @media(min-width:900px){.contact-grid{grid-template-columns:1.2fr 1fr}}
 
-    /* WhatsApp floating CTA */
+    /* Floating WhatsApp CTA */
     .whatsapp-float{position:fixed;right:18px;bottom:18px;background:#25D366;border-radius:50%;width:56px;height:56px;display:grid;place-items:center;z-index:150;box-shadow:0 10px 30px rgba(0,0,0,0.2)}
     .whatsapp-float img{width:28px}
 
@@ -136,28 +136,20 @@
     /* small screens tweaks */
     @media(max-width:700px){
       .hero-right{display:none}
-      .fssai-corner img{height:34px}
-      .brand-center .name{font-size:1rem}
-      .brand-center .tag{font-size:.82rem}
+      .fssai-logo{height:34px}
     }
 
+    /* small accessibility focus outline */
+    button:focus, a:focus { outline: 3px solid rgba(0,0,0,0.08); outline-offset: 2px; }
   </style>
 </head>
 <body>
 
-  <!-- header with FSSAI top-left and brand center -->
+  <!-- HEADER: centered FSSAI (no brand block) -->
   <header>
-    <div class="fssai-corner">
-      <!-- keep this image small (40px height). Use your uploaded image at images/fssai.png -->
-      <img src="images/fssai.png" alt="FSSAI logo">
-      <div class="id" aria-hidden="true">Lic. No. 21525022001241</div>
-    </div>
-
-    <div class="wrap" style="display:flex;justify-content:center">
-      <div class="brand-center" role="banner">
-        <div class="name">Saroja’s Spices</div>
-        <div class="tag">Make your Food Tasty</div>
-      </div>
+    <div class="header-center">
+      <img class="fssai-logo" src="images/fssai.png" alt="FSSAI logo">
+      <div class="fssai-id">Lic. No. 21525022001241</div>
     </div>
   </header>
 
@@ -304,7 +296,7 @@
 
   <!-- Price modal overlay -->
   <div id="overlay" class="overlay" role="dialog" aria-hidden="true">
-    <div class="modal" role="document">
+    <div class="modal" role="document" aria-modal="true">
       <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
         <h3 style="margin:0">Price List</h3>
         <button class="close" id="close-overlay" aria-label="Close">✕</button>
@@ -314,10 +306,10 @@
   </div>
 
   <script>
-    // set footer year
+    // footer year
     document.getElementById('yr').textContent = new Date().getFullYear();
 
-    // reveal on scroll
+    // reveal-on-scroll
     const io = new IntersectionObserver((entries)=>{
       entries.forEach(e=>{
         if(e.isIntersecting) e.target.classList.add('show');
@@ -325,7 +317,7 @@
     },{threshold:0.12});
     document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-    // load prices.json and helpers
+    // prices.json loader
     let PRICES = null;
     async function loadPrices(){
       if(PRICES) return PRICES;
@@ -370,8 +362,9 @@
     document.getElementById('open-prices').addEventListener('click',()=>openPrices());
     document.getElementById('close-overlay').addEventListener('click',()=>{overlay.classList.remove('show');overlay.setAttribute('aria-hidden','true')});
     overlay.addEventListener('click',(e)=>{ if(e.target===overlay){ overlay.classList.remove('show');overlay.setAttribute('aria-hidden','true') } });
+    document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && overlay.classList.contains('show')){ overlay.classList.remove('show'); overlay.setAttribute('aria-hidden','true'); } });
 
-    // See Prices button handlers
+    // attach See Prices buttons
     function attachPriceButtons(scope=document){
       scope.querySelectorAll('[data-action="prices"]').forEach(btn=>{
         btn.addEventListener('click',()=>{
@@ -382,7 +375,7 @@
     }
     attachPriceButtons();
 
-    // Responsive: create desktop grid by cloning product cards when larger
+    // responsive: clone to grid on larger screens
     function upgradeGrid(){
       const grid = document.querySelector('.card-grid');
       const scrollArea = document.querySelector('.products-scroll');
@@ -395,8 +388,7 @@
           grid.style.display='grid';
           grid.style.gridTemplateColumns='repeat(5,1fr)';
           scrollArea.style.display='none';
-          // attach buttons in cloned grid
-          attachPriceButtons(grid);
+          attachPriceButtons(grid); // attach events for cloned buttons
         }
       }else{
         if(grid) grid.style.display='none';
@@ -406,13 +398,19 @@
     window.addEventListener('resize',upgradeGrid);
     upgradeGrid();
 
-    // improve keyboard accessibility: trap close overlay on Escape
-    document.addEventListener('keydown', (e)=>{
-      if(e.key === 'Escape' && overlay.classList.contains('show')){
-        overlay.classList.remove('show');
-        overlay.setAttribute('aria-hidden','true');
-      }
-    });
+    // highlight active nav link on scroll (simple)
+    const navLinks = document.querySelectorAll('.nav-ribbon a');
+    const sections = ['home','products','pricing','contact'].map(id=>document.getElementById(id));
+    function onScroll(){
+      const y = window.scrollY + 120;
+      let activeIndex = 0;
+      sections.forEach((sec,i)=>{
+        if(sec && sec.offsetTop <= y) activeIndex = i;
+      });
+      navLinks.forEach((a, i)=> a.classList.toggle('active', i===activeIndex));
+    }
+    window.addEventListener('scroll', onScroll);
+    onScroll();
 
   </script>
 </body>
