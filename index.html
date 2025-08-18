@@ -27,40 +27,17 @@
     p{font-size:clamp(1rem,1.4vw,1.25rem);line-height:1.7;margin:0 0 1rem;color:var(--muted)}
     a{color:inherit;text-decoration:none}
     img{max-width:100%;display:block}
-    
-.fssai-badge {
-  position: relative;
-  display: inline-block;
-  width: 150px;   /* adjust as per your design */
-}
-
-.fssai-logo {
-  width: 100%;
-  display: block;
-}
-
-.fssai-id {
-  position: absolute;
-  bottom: 5px; /* leaves a little space from bottom */
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 12px;
-  font-weight: bold;
-  color: #000;
-  background: rgba(255,255,255,0.7); /* optional for better visibility */
-  padding: 2px 6px;
-  border-radius: 3px;
-}
 
     /* Header / Nav */
-    header{
-      position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #eee
-    }
+    header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #eee}
     .nav{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:.6rem 1rem}
     .brand{display:flex;align-items:center;gap:.75rem}
-    .fssai-badge{display:inline-flex;align-items:center;justify-content:center;padding:.35rem .75rem;border-radius:14px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.08);border:1px solid #eee}
-    .fssai-badge b{font-weight:800;letter-spacing:.5px}
-    .fssai-id{font-size:.75rem;color:#2e2e2e;margin-left:.5rem}
+
+    /* NEW: simple FSSAI logo + text side-by-side */
+    .fssai{display:inline-flex;align-items:center;gap:.5rem}
+    .fssai img{height:28px;width:auto;display:block}
+    .fssai .id{font-weight:800;font-size:.9rem;letter-spacing:.3px;color:#2e2e2e;white-space:nowrap}
+
     nav ul{display:flex;gap:1rem;margin:0;padding:0;list-style:none;font-weight:800}
     nav a{padding:.5rem .7rem;border-radius:10px}
     nav a:hover{background:#f7f7f7}
@@ -129,6 +106,8 @@
       nav ul{display:none} /* keep it minimal on very small screens */
       .card-grid{grid-template-columns:repeat(2,1fr)}
       .cta-row{grid-template-columns:repeat(2,1fr)}
+      .fssai img{height:24px}
+      .fssai .id{font-size:.85rem}
     }
   </style>
 </head>
@@ -137,12 +116,11 @@
   <header>
     <div class="nav">
       <div class="brand">
-        <!-- FSSAI Badge -->
-                <div class="fssai-badge">
-                  <img src="images/fssai.png" alt="FSSAI Logo" class="fssai-logo">
-                  <span class="fssai-id">Lic. No. 21525022001241</span>
-                </div>
-
+        <!-- FSSAI logo with license number to the right -->
+        <div class="fssai" aria-label="FSSAI license 21525022001241">
+          <img src="images/fssai.png" alt="FSSAI logo">
+          <span class="id">Lic. No. 21525022001241</span>
+        </div>
       </div>
       <nav aria-label="Primary">
         <ul>
@@ -163,7 +141,6 @@
       <h1>Saroja’s Spices</h1>
       <p>Make your Food Tasty</p>
       <div class="hero-visual">
-        <!-- Replace images/banner.jpg with your hero image path -->
         <img src="images/banner.jpg" alt="Jars and bowls of Indian spices" />
       </div>
     </div>
@@ -220,7 +197,6 @@
     <div class="container">
       <h2>Our Special</h2>
       <div class="card-grid">
-        <!-- Replace images with your product photos -->
         <article class="card"><img src="images/ghati.jpg" alt="Ghati Masala"><div class="title">GHATI MASALA</div></article>
         <article class="card"><img src="images/ghoda.jpg" alt="Ghoda Masala (Kala)"><div class="title">GHODA MASALA</div></article>
         <article class="card"><img src="images/sambar.jpg" alt="Sambhar Masala"><div class="title">SAMBHAR MASALA</div></article>
@@ -229,13 +205,20 @@
       </div>
     </div>
   </section>
+
   <!-- Testimonials -->
   <section id="testimonials" class="testimonials">
     <div class="container" style="text-align:center">
       <h2>What Our Customers Say</h2>
       <div style="max-width:800px;margin:1rem auto 0">
         <p style="font-style:italic;color:#555">"Sarojasspices products are always fresh and full of flavor. My family loves the sambar masala!"</p>
-        <p style="font-style:italic;color:#555">"Quality y
+        <p style="font-style:italic;color:#555">"Quality you can taste. The peanut chutney adds a perfect punch to every meal."</p>
+        <p style="font-style:italic;color:#555">"Great packaging and genuine spices. Highly recommended!"</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
   <section id="pricing" class="pricing">
     <div class="container">
       <p class="notice">Free shipping on all orders above ₹1,500.</p>
@@ -300,7 +283,6 @@
           </div>
         </div>
         <div class="map">
-          <!-- Replace the src with your exact Google Maps embed URL if you have one -->
           <iframe loading="lazy" allowfullscreen
             referrerpolicy="no-referrer-when-downgrade"
             src="https://www.google.com/maps?q=Rubiyana%20Residency%2C%20Behind%20HP%20Petrol%20Pump%2C%20Katrap%2C%20Badlapur%20East%20421503&output=embed"></iframe>
