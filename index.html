@@ -28,22 +28,29 @@
     a{color:inherit;text-decoration:none}
     img{max-width:100%;display:block}
     
-            .fssai-badge {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          margin-top: 10px;
-        }
-        
-        .fssai-logo {
-          height: 40px; /* adjust size as needed */
-        }
-        
-        .fssai-id {
-          font-size: 14px;
-          font-weight: 600;
-          color: #333;
-        }
+.fssai-badge {
+  position: relative;
+  display: inline-block;
+  width: 150px;   /* adjust as per your design */
+}
+
+.fssai-logo {
+  width: 100%;
+  display: block;
+}
+
+.fssai-id {
+  position: absolute;
+  bottom: 5px; /* leaves a little space from bottom */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  font-weight: bold;
+  color: #000;
+  background: rgba(255,255,255,0.7); /* optional for better visibility */
+  padding: 2px 6px;
+  border-radius: 3px;
+}
 
     /* Header / Nav */
     header{
@@ -131,10 +138,10 @@
     <div class="nav">
       <div class="brand">
         <!-- FSSAI Badge -->
-          <div class="fssai-badge">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/1/13/FSSAI_logo.svg" alt="FSSAI Logo" class="fssai-logo">
-            <span class="fssai-id">Lic No. 21525022001241</span>
-          </div>
+                <div class="fssai-badge">
+                  <img src="images/fssai.png" alt="FSSAI Logo" class="fssai-logo">
+                  <span class="fssai-id">Lic. No. 21525022001241</span>
+                </div>
 
       </div>
       <nav aria-label="Primary">
