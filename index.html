@@ -1,74 +1,324 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FSSAI License Numbers</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Saroja’s Spices</title>
+  <meta name="description" content="Saroja’s Spices – premium Indian spice blends and single-origin spices. Wholesale & retail. Badlapur, Maharashtra." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Display fonts roughly matching your Canva look -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      background-color: #f9f9f9;
+    :root{
+      --brand:#f38442;      /* Orange background */
+      --text:#111;          /* Body text */
+      --muted:#444;         /* Secondary text */
+      --card:#fff;          /* Cards */
+      --max:1200px;         /* Max content width */
+      --radius:22px;        /* Big rounded corners */
     }
-    .container {
-      max-width: 900px;
-      margin: auto;
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:"DM Sans",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);background:#fff}
+    h1,h2,h3{font-family:"Montserrat",system-ui,Segoe UI,Roboto,Arial,sans-serif;line-height:1.1;margin:0 0 .5rem}
+    h1{font-size:clamp(2.2rem,6vw,4.5rem);font-weight:900}
+    h2{font-size:clamp(1.8rem,4.5vw,3rem);font-weight:900}
+    p{font-size:clamp(1rem,1.4vw,1.25rem);line-height:1.7;margin:0 0 1rem;color:var(--muted)}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    
+.fssai-badge {
+  position: relative;
+  display: inline-block;
+  width: 150px;   /* adjust as per your design */
+}
+
+.fssai-logo {
+  width: 100%;
+  display: block;
+}
+
+.fssai-id {
+  position: absolute;
+  bottom: 5px; /* leaves a little space from bottom */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  font-weight: bold;
+  color: #000;
+  background: rgba(255,255,255,0.7); /* optional for better visibility */
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+    /* Header / Nav */
+    header{
+      position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #eee
     }
-    .item {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      background: #fff;
-      margin: 15px 0;
-      padding: 15px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    .nav{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:.6rem 1rem}
+    .brand{display:flex;align-items:center;gap:.75rem}
+    .fssai-badge{display:inline-flex;align-items:center;justify-content:center;padding:.35rem .75rem;border-radius:14px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.08);border:1px solid #eee}
+    .fssai-badge b{font-weight:800;letter-spacing:.5px}
+    .fssai-id{font-size:.75rem;color:#2e2e2e;margin-left:.5rem}
+    nav ul{display:flex;gap:1rem;margin:0;padding:0;list-style:none;font-weight:800}
+    nav a{padding:.5rem .7rem;border-radius:10px}
+    nav a:hover{background:#f7f7f7}
+
+    /* Sections */
+    section{scroll-margin-top:76px}
+    .container{max-width:var(--max);margin:0 auto;padding:4rem 1rem}
+
+    /* Hero */
+    .hero{background:var(--brand);color:#000}
+    .hero .container{padding:3.5rem 1rem 2rem}
+    .hero h1{color:#000}
+    .hero p{color:#251e18;font-weight:600}
+    .hero-visual{margin:2rem auto 0;max-width:1000px;border-radius:12px;overflow:hidden}
+
+    /* About */
+    .about{background:#fff}
+    .grid{display:grid;grid-template-columns:1.1fr 1fr;gap:2rem;align-items:center}
+    .about img{border-radius:10px}
+
+    /* Why Us card list */
+    .why .wrap{display:grid;grid-template-columns:1fr 1.2fr;gap:2rem;align-items:center}
+    .why-card{background:var(--brand);border-radius:var(--radius);padding:2rem;box-shadow:0 10px 25px rgba(0,0,0,.08)}
+    .why-item{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start;margin-bottom:1.3rem}
+    .why-num{width:42px;height:42px;border-radius:999px;background:#000;color:#fff;font-weight:900;display:grid;place-items:center}
+    .why h3{margin:0 0 .25rem}
+
+    /* Products */
+    .products h2{text-align:center;margin-bottom:2rem}
+    .card-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1.2rem}
+    .card{background:var(--card);border-radius:18px;overflow:hidden;box-shadow:0 10px 20px rgba(0,0,0,.06);border:1px solid #f0f0f0;display:flex;flex-direction:column}
+    .card img{aspect-ratio:4/5;object-fit:cover}
+    .card .title{background:var(--brand);padding:1rem 1.25rem;font-weight:900;text-align:center}
+
+    /* Pricing */
+    .pricing{background:var(--brand)}
+    .pricing .container{padding-top:2rem}
+    .notice{text-align:center;font-weight:700;margin-bottom:1rem}
+    .pricing-wrap{display:grid;grid-template-columns:1fr 1.2fr;gap:2rem;align-items:start}
+    .price-left h2{font-size:3rem;line-height:1.05;margin-bottom:1rem;text-shadow:6px 8px 0 rgba(0,0,0,.1)}
+    .price-left p{color:#111}
+    table{width:100%;border-collapse:collapse;background:#fffcf9;border-radius:12px;overflow:hidden}
+    th,td{border:3px solid rgba(0,0,0,.08);padding:.8rem .7rem;text-align:center}
+    th{background:rgba(255,255,255,.85);font-weight:900}
+
+    /* Contact */
+    .contact{background:var(--brand)}
+    .contact h2{text-align:center;margin-bottom:1rem}
+    .contact-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:2rem;align-items:start}
+    .info dt{font-weight:900;margin:.6rem 0 .25rem}
+    .cta-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:1.5rem}
+    .cta{display:grid;place-items:center;padding:1rem;border-radius:16px;background:#fff;box-shadow:0 8px 18px rgba(0,0,0,.08);font-weight:800}
+    .map iframe{width:100%;height:280px;border:0;border-radius:14px}
+
+    /* Footer */
+    footer{border-top:1px solid #eee}
+    footer .container{display:flex;justify-content:space-between;gap:1rem;padding:1.2rem}
+    .tiny{color:#666;font-size:.9rem}
+
+    /* Responsive */
+    @media (max-width:1100px){
+      .grid,.why .wrap,.pricing-wrap,.contact-grid{grid-template-columns:1fr}
+      .card-grid{grid-template-columns:repeat(3,1fr)}
     }
-    .item img {
-      width: 50%;
-      border-radius: 6px;
-    }
-    .text {
-      margin-left: 20px;
-      font-size: 18px;
-      font-weight: bold;
-      color: #333;
-    }
-    .license {
-      color: #007BFF;
-      font-size: 16px;
-      margin-top: 5px;
-      display: block;
+    @media (max-width:700px){
+      nav ul{display:none} /* keep it minimal on very small screens */
+      .card-grid{grid-template-columns:repeat(2,1fr)}
+      .cta-row{grid-template-columns:repeat(2,1fr)}
     }
   </style>
 </head>
 <body>
-  <div class="container">
+  <!-- Header -->
+  <header>
+    <div class="nav">
+      <div class="brand">
+        <!-- FSSAI Badge -->
+                <div class="fssai-badge">
+                  <img src="images/fssai.png" alt="FSSAI Logo" class="fssai-logo">
+                  <span class="fssai-id">Lic. No. 21525022001241</span>
+                </div>
 
-    <div class="item">
-      <img src="images/sambar.jpg" alt="Sambar">
-      <div class="text">
-        Sambar Masala  
-        <span class="license">FSSAI Lic No: 21523124000597</span>
+      </div>
+      <nav aria-label="Primary">
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About us</a></li>
+          <li><a href="#why">Why us?</a></li>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#contact">Contact us</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero / Home -->
+  <section id="home" class="hero" aria-label="Hero">
+    <div class="container">
+      <h1>Saroja’s Spices</h1>
+      <p>Make your Food Tasty</p>
+      <div class="hero-visual">
+        <!-- Replace images/banner.jpg with your hero image path -->
+        <img src="images/banner.jpg" alt="Jars and bowls of Indian spices" />
       </div>
     </div>
+  </section>
 
-    <div class="item">
-      <img src="images/peanut.jpg" alt="Peanut">
-      <div class="text">
-        Peanut Butter  
-        <span class="license">FSSAI Lic No: 21523124000635</span>
+  <!-- About -->
+  <section id="about" class="about">
+    <div class="container grid">
+      <div>
+        <img src="images/about.jpg" alt="Assorted spices in bowls" />
+      </div>
+      <div>
+        <h2>About us</h2>
+        <p>Saroja's Spices is a premium provider of authentic, high-quality spices to elevate culinary experiences. We source the finest ingredients, crafting exceptional spice blends and single-origin spices that capture the rich flavors and aromas of traditional Indian cuisine. Our offerings include signature blends and customized spice solutions to meet diverse customer needs. We also deal in wholesale orders for hotels & restaurants. We prioritize sourcing excellence, authenticity, quality, and customer focus. Saroja's Spices empowers food enthusiasts to create memorable, flavorful dishes with our premium spices.</p>
       </div>
     </div>
+  </section>
 
-    <div class="item">
-      <img src="images/spices.jpg" alt="Indian Spices">
-      <div class="text">
-        Indian Spices  
-        <span class="license">FSSAI Lic No: 21523124000597</span>
+  <!-- Why Us -->
+  <section id="why" class="why">
+    <div class="container wrap">
+      <div>
+        <h2>A Matter of Taste</h2>
+        <p>There is a reason our regulars have been coming back for more. Word of mouth has been our only advertisement – but happy mouths are the best ambassadors!</p>
+      </div>
+      <div class="why-card">
+        <div class="why-item">
+          <div class="why-num">1</div>
+          <div>
+            <h3>Unleash a Symphony of Flavours</h3>
+            <p>Step into a world where aromas dance and colours ignite. From the warmth of cinnamon to the fiery kiss of chilli, discover a curated collection of the finest spices to elevate your culinary creations. Your journey to flavour begins here.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-num">2</div>
+          <div>
+            <h3>Elevate Your Cooking</h3>
+            <p>Discover a world of flavor with our premium selection of spices, carefully sourced to bring depth and aroma to every dish.</p>
+          </div>
+        </div>
+        <div class="why-item" style="margin-bottom:0">
+          <div class="why-num">3</div>
+          <div>
+            <h3>Quality You Can Taste</h3>
+            <p>Experience the difference of freshly ground and high-quality spices that will truly transform your meals.</p>
+          </div>
+        </div>
       </div>
     </div>
+  </section>
 
-  </div>
+  <!-- Products -->
+  <section id="products" class="products">
+    <div class="container">
+      <h2>Our Special</h2>
+      <div class="card-grid">
+        <!-- Replace images with your product photos -->
+        <article class="card"><img src="images/ghati.jpg" alt="Ghati Masala"><div class="title">GHATI MASALA</div></article>
+        <article class="card"><img src="images/ghoda.jpg" alt="Ghoda Masala (Kala)"><div class="title">GHODA MASALA</div></article>
+        <article class="card"><img src="images/sambar.jpg" alt="Sambhar Masala"><div class="title">SAMBHAR MASALA</div></article>
+        <article class="card"><img src="images/jawas.jpg" alt="Jawas Chutney"><div class="title">JAWAS CHUTNEY</div></article>
+        <article class="card"><img src="images/peanut.jpg" alt="Dry Peanut Chutney"><div class="title">DRY PEANUT<br/>CHUTNEY</div></article>
+      </div>
+    </div>
+  </section>
+  <!-- Testimonials -->
+  <section id="testimonials" class="testimonials">
+    <div class="container" style="text-align:center">
+      <h2>What Our Customers Say</h2>
+      <div style="max-width:800px;margin:1rem auto 0">
+        <p style="font-style:italic;color:#555">"Sarojasspices products are always fresh and full of flavor. My family loves the sambar masala!"</p>
+        <p style="font-style:italic;color:#555">"Quality y
+  <section id="pricing" class="pricing">
+    <div class="container">
+      <p class="notice">Free shipping on all orders above ₹1,500.</p>
+      <div class="pricing-wrap">
+        <div class="price-left">
+          <h2>Price Drop<br/>Order Now!</h2>
+          <p>Great news for spice enthusiasts and culinary adventurers! The spices you love are now more affordable than ever with our latest price drop. Whether you're a fan of aromatic cumin, fiery cayenne, or exotic cardamom, this is the perfect opportunity to stock up on your favourites and experiment with new flavors. Spices not only enhance the taste of your dishes but also offer numerous health benefits, making them a staple in every kitchen. So, why not take advantage of these fantastic savings and add a little extra zest to your meals? Don't miss out on the chance to elevate your cooking game without breaking the bank.</p>
+        </div>
+        <div class="price-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Products</th>
+                <th>50 Grams</th>
+                <th>100 Grams</th>
+                <th>200 Grams</th>
+                <th>500 Grams</th>
+                <th>1 KG</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><b>Ghati Masala</b><br><small>(Used in Food Recipe)</small></td><td>50</td><td>90</td><td>160</td><td>360</td><td>650</td></tr>
+              <tr><td><b>Ghoda (Kala Masala)</b><br><small>(Used in Food Recipe)</small></td><td>50</td><td>90</td><td>160</td><td>360</td><td>650</td></tr>
+              <tr><td><b>Sambhar Masala</b><br><small>(Soul of the Delicacy)</small></td><td>50</td><td>90</td><td>160</td><td>360</td><td>650</td></tr>
+              <tr><td><b>Jawas Chutney</b><br><small>(It's often served as a side dish)</small></td><td>40</td><td>70</td><td>125</td><td>230</td><td>450</td></tr>
+              <tr><td><b>Dry Peanut Chutney</b><br><small>(It's often served as a side dish)</small></td><td>35</td><td>60</td><td>110</td><td>210</td><td>400</td></tr>
+              <tr><td><b>Veg Biryani Masala</b><br><small>(Soul of the Delicacy)</small></td><td>60</td><td>105</td><td>190</td><td>425</td><td>760</td></tr>
+              <tr><td><b>Chicken Biryani Masala</b><br><small>(Soul of the Delicacy)</small></td><td>60</td><td>105</td><td>190</td><td>425</td><td>760</td></tr>
+              <tr><td><b>Magic Mutton Masala</b><br><small>(Food Recipe)</small></td><td>60</td><td>105</td><td>190</td><td>425</td><td>760</td></tr>
+              <tr><td><b>Dhana Jeera Powder</b><br><small>(Used in Food Recipe)</small></td><td>40</td><td>70</td><td>125</td><td>230</td><td>450</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <h2>Do visit us soon!</h2>
+      <div class="contact-grid">
+        <div>
+          <dl class="info">
+            <dt>Store</dt>
+            <dd><a href="https://g.co/kgs/PLACE_ID" target="_blank" rel="noopener">Saroja's Spices</a></dd>
+            <dt>Email Address</dt>
+            <dd><a href="mailto:sarojasspices@gmail.com">sarojasspices@gmail.com</a></dd>
+            <dt>Phone Number</dt>
+            <dd><a href="tel:+919820542750">982-054-2750</a></dd>
+            <dt>Instagram</dt>
+            <dd><a href="https://instagram.com/sarojasspices/" target="_blank" rel="noopener">instagram.com/sarojasspices/</a></dd>
+            <dt>Address</dt>
+            <dd>203, Rubiyana Residency, Behind HP Petrol Pump, Katrap, Badlapur East 421503</dd>
+          </dl>
+
+          <div class="cta-row">
+            <a class="cta" href="tel:+919820542750">Call</a>
+            <a class="cta" href="https://wa.me/919820542750" target="_blank" rel="noopener">WhatsApp</a>
+            <a class="cta" href="mailto:sarojasspices@gmail.com">Email</a>
+            <a class="cta" href="https://instagram.com/sarojasspices/" target="_blank" rel="noopener">Instagram</a>
+          </div>
+        </div>
+        <div class="map">
+          <!-- Replace the src with your exact Google Maps embed URL if you have one -->
+          <iframe loading="lazy" allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=Rubiyana%20Residency%2C%20Behind%20HP%20Petrol%20Pump%2C%20Katrap%2C%20Badlapur%20East%20421503&output=embed"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="tiny">© <span id="yr"></span> Saroja’s Spices • FSSAI 21525022001241</div>
+      <div class="tiny">Made with ♥ in Badlapur</div>
+    </div>
+  </footer>
+
+  <script>
+    // Set current year in footer
+    document.getElementById('yr').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
