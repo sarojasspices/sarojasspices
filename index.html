@@ -1,148 +1,186 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Saroja’s Spices — Make your Food Tasty</title>
   <meta name="description" content="Saroja’s Spices — premium Indian spice blends. Order via WhatsApp. Badlapur, Maharashtra."/>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    /* --- Design tokens --- */
     :root{
-      --brand:#f26f2b; /* warm orange */
+      --brand:#f26f2b;
       --accent:#ffb57b;
       --bg:#fffaf6;
       --muted:#6b6b6b;
       --text:#222;
-      --card:#ffffff;
-      --radius:14px;
+      --card:#fff;
+      --radius:12px;
       --container:1100px;
     }
-    /* --- Reset & base --- */
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{margin:0;font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased}
     img{display:block;max-width:100%;height:auto}
     a{color:inherit;text-decoration:none}
-
-    /* --- Layout container --- */
     .wrap{max-width:var(--container);margin:0 auto;padding:0 16px}
 
-    /* --- Top bar / header --- */
-    header{position:sticky;top:0;background:white;z-index:60;border-bottom:1px solid rgba(0,0,0,0.06)}
-    .nav{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
-    .brand{display:flex;flex-direction:column;line-height:1}
-    .brand .name{font-weight:700;font-size:1.05rem;color:var(--text);letter-spacing:0.2px}
-    .brand .tag{font-size:0.85rem;color:var(--muted)}
-    .nav-right{display:flex;gap:12px;align-items:center}
-    .fssai{display:flex;align-items:center;gap:8px}
-    .fssai img{height:26px}
-    .fssai .id{font-size:0.82rem;color:var(--muted);font-weight:600}
-    .menu{display:flex;gap:10px}
-    .menu a{font-weight:600;color:var(--muted);padding:8px;border-radius:10px}
-    .menu a:hover{background:rgba(0,0,0,0.03)}
+    /* HEADER wrapper (keeps brand centered) */
+    header{
+      position:relative;
+      background:white;
+      border-bottom:1px solid rgba(0,0,0,0.06);
+      padding:14px 0 10px;
+      z-index:80;
+    }
+    /* FSSAI top-left */
+    .fssai-corner{
+      position:absolute;
+      left:10px;
+      top:10px;
+      display:flex;
+      align-items:center;
+      gap:6px;
+      pointer-events:auto;
+      z-index:90;
+    }
+    .fssai-corner img{height:40px;width:auto;display:block}
+    .fssai-corner .id{font-size:11px;color:var(--muted);font-weight:700}
 
-    /* --- Hero --- */
-    .hero{background:linear-gradient(180deg,var(--brand),var(--accent));color:#1a130f;padding:36px 0 28px;border-bottom-left-radius:24px;border-bottom-right-radius:24px}
-    .hero .hero-inner{display:flex;gap:20px;align-items:center}
-    .hero-left{flex:1}
-    .hero h1{font-size:clamp(1.6rem,6vw,2.6rem);margin:0 0 8px;line-height:1}
-    .hero p{margin:0 0 14px;color:#2b1f19;font-weight:600}
-    .cta-row{display:flex;gap:10px;flex-wrap:wrap}
+    /* Brand centered */
+    .brand-center{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+    .brand-center .name{font-weight:700;font-size:1.05rem;line-height:1}
+    .brand-center .tag{font-size:.86rem;color:var(--muted);margin-top:4px}
+
+    /* NAV RIBBON (sticky) */
+    .nav-ribbon{
+      position:sticky;
+      top:0; /* sticks to top of viewport when it reaches there */
+      z-index:85;
+      background:#fff;
+      border-bottom:1px solid rgba(0,0,0,0.06);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:8px 12px;
+      gap:12px;
+    }
+    .nav-ribbon a{
+      display:inline-block;
+      padding:8px 12px;
+      border-radius:10px;
+      font-weight:600;
+      color:var(--muted);
+    }
+    .nav-ribbon a:hover{background:rgba(0,0,0,0.04)}
+
+    /* HERO */
+    .hero{background:linear-gradient(180deg,var(--brand),var(--accent));color:#1a130f;padding:28px 0 22px;border-bottom-left-radius:18px;border-bottom-right-radius:18px}
+    .hero-inner{display:flex;gap:18px;align-items:center;max-width:var(--container);margin:0 auto;padding:0 16px}
+    .hero-left{flex:1;text-align:center} /* center title always */
+    .hero-left h1{font-size:clamp(1.6rem,6vw,2.4rem);margin:0;font-weight:700;line-height:1}
+    .hero-left p{margin:8px 0 14px;color:#2b1f19;font-weight:600}
+    .cta-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
     .btn{background:#000;color:white;padding:10px 14px;border-radius:10px;font-weight:700;display:inline-block}
     .btn.outline{background:transparent;color:#000;border:2px solid rgba(0,0,0,0.06)}
-    .hero-right{width:220px;border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.12)}
 
-    /* --- Product showcase (mobile-first) --- */
-    .section{padding:28px 0}
-    .section h2{font-size:1.25rem;margin:0 0 14px}
+    .hero-right{width:200px;border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.12)}
+    .hero-right img{width:100%;height:170px;object-fit:cover}
 
+    /* Mobile-first product showcase */
+    .section{padding:22px 0}
+    .section h2{font-size:1.1rem;margin:0 0 12px}
     .products-scroll{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x mandatory}
-    .product-card{min-width:200px;flex:0 0 70%;background:var(--card);border-radius:12px;padding:10px;box-shadow:0 8px 24px rgba(0,0,0,0.06);scroll-snap-align:center}
-    .product-card img{border-radius:10px;height:160px;object-fit:cover}
+    .product-card{min-width:68%;flex:0 0 68%;background:var(--card);border-radius:12px;padding:10px;box-shadow:0 8px 24px rgba(0,0,0,0.06);scroll-snap-align:center}
+    .product-card img{border-radius:10px;height:150px;object-fit:cover}
     .product-name{font-weight:700;margin:8px 0 6px}
     .product-desc{font-size:0.95rem;color:var(--muted);margin-bottom:8px}
-    .product-actions{display:flex;gap:8px}
-    .pill{background:var(--accent);padding:6px 8px;border-radius:8px;font-weight:700}
+    .product-actions{display:flex;gap:8px;align-items:center}
 
-    /* On larger screens, show grid */
+    /* Desktop: grid */
     @media(min-width:820px){
-      .hero .hero-inner{align-items:center}
-      .hero-right{width:360px}
+      .hero-right{width:340px;height:220px}
+      .hero-right img{height:220px}
       .product-card{min-width:0;flex:1;scroll-snap-align:none}
       .card-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
       .products-scroll{overflow:visible}
     }
 
-    /* --- Price modal / table --- */
-    .overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);z-index:120;padding:20px}
+    /* Price overlay modal */
+    .overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);z-index:140;padding:20px}
     .overlay.show{display:flex}
-    .modal{background:white;border-radius:12px;max-width:900px;width:100%;max-height:90vh;overflow:auto;padding:18px}
+    .modal{background:white;border-radius:12px;max-width:920px;width:100%;max-height:90vh;overflow:auto;padding:18px}
     .modal .close{float:right;background:#eee;border-radius:8px;padding:6px;cursor:pointer}
     .price-table{width:100%;border-collapse:collapse;margin-top:8px}
     .price-table th,.price-table td{padding:10px;border-bottom:1px solid #f0e8e0;text-align:center}
     .price-table thead th{background:var(--brand);color:white;font-weight:700}
     .product-name-left{text-align:left;padding-left:12px;font-weight:700}
 
-    /* --- Testimonials --- */
+    /* Testimonials */
     .testimonials-grid{display:grid;grid-template-columns:1fr;gap:12px}
     .test-card{background:var(--card);padding:12px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.05)}
     .test-card p{margin:0;color:var(--muted);font-style:italic}
     .test-card strong{display:block;margin-top:8px;color:var(--text)}
     @media(min-width:900px){.testimonials-grid{grid-template-columns:repeat(3,1fr)}}
 
-    /* --- Contact & WhatsApp CTA --- */
     .contact-grid{display:grid;grid-template-columns:1fr;gap:12px}
     @media(min-width:900px){.contact-grid{grid-template-columns:1.2fr 1fr}}
-    .whatsapp-float{position:fixed;right:18px;bottom:18px;background:#25D366;border-radius:50%;width:56px;height:56px;display:grid;place-items:center;z-index:140;box-shadow:0 10px 30px rgba(0,0,0,0.2)}
+
+    /* WhatsApp floating CTA */
+    .whatsapp-float{position:fixed;right:18px;bottom:18px;background:#25D366;border-radius:50%;width:56px;height:56px;display:grid;place-items:center;z-index:150;box-shadow:0 10px 30px rgba(0,0,0,0.2)}
     .whatsapp-float img{width:28px}
 
-    /* --- Reveal animation --- */
-    .reveal{opacity:0;transform:translateY(18px);transition:all .6s cubic-bezier(.2,.9,.3,1)}
+    /* Reveal animation */
+    .reveal{opacity:0;transform:translateY(16px);transition:all .6s cubic-bezier(.2,.9,.3,1)}
     .reveal.show{opacity:1;transform:none}
 
-    /* --- Footer --- */
-    footer{padding:18px 0;background:#fff;border-top:1px solid rgba(0,0,0,0.04);margin-top:28px}
-    footer .foot-inner{display:flex;justify-content:space-between;align-items:center;gap:12px}
-    @media(max-width:700px){.hero-right{display:none}.brand{align-items:flex-start}}
+    /* small screens tweaks */
+    @media(max-width:700px){
+      .hero-right{display:none}
+      .fssai-corner img{height:34px}
+      .brand-center .name{font-size:1rem}
+      .brand-center .tag{font-size:.82rem}
+    }
+
   </style>
 </head>
 <body>
+
+  <!-- header with FSSAI top-left and brand center -->
   <header>
-    <div class="wrap nav">
-      <div class="brand">
+    <div class="fssai-corner">
+      <!-- keep this image small (40px height). Use your uploaded image at images/fssai.png -->
+      <img src="images/fssai.png" alt="FSSAI logo">
+      <div class="id" aria-hidden="true">Lic. No. 21525022001241</div>
+    </div>
+
+    <div class="wrap" style="display:flex;justify-content:center">
+      <div class="brand-center" role="banner">
         <div class="name">Saroja’s Spices</div>
         <div class="tag">Make your Food Tasty</div>
-      </div>
-
-      <div class="nav-right">
-        <nav class="menu" aria-label="Primary">
-          <a href="#products">Our Special</a>
-          <a href="#pricing">Prices</a>
-          <a href="#contact">Contact</a>
-        </nav>
-        <div class="fssai" aria-hidden="false">
-          <img src="images/fssai.png" alt="FSSAI">
-          <div class="id">Lic. No. 21525022001241</div>
-        </div>
       </div>
     </div>
   </header>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="wrap hero-inner">
+  <!-- sticky navigation ribbon (frozen) -->
+  <div class="nav-ribbon" role="navigation" aria-label="Primary navigation">
+    <a href="#home">Home</a>
+    <a href="#products">Our Special</a>
+    <a href="#pricing">Prices</a>
+    <a href="#contact">Contact</a>
+  </div>
+
+  <!-- hero -->
+  <section id="home" class="hero" aria-label="Hero">
+    <div class="hero-inner">
       <div class="hero-left">
         <h1>Saroja’s Spices</h1>
         <p>Make your Food Tasty — premium blends & authentic flavours from Badlapur.</p>
         <div class="cta-row">
-          <a class="btn" href="https://wa.me/919820542750" target="_blank">Order on WhatsApp</a>
+          <a class="btn" href="https://wa.me/919820542750" target="_blank" rel="noopener">Order on WhatsApp</a>
           <a class="btn outline" href="#products">Explore Specials</a>
         </div>
       </div>
-      <div class="hero-right">
+      <div class="hero-right" aria-hidden="true">
         <img src="images/banner.jpg" alt="Spices banner">
       </div>
     </div>
@@ -152,7 +190,7 @@
   <section id="products" class="section">
     <div class="wrap">
       <h2>Our Special</h2>
-      <!-- mobile horizontal scroll, desktop grid -->
+
       <div class="products-scroll reveal" id="products-scroll">
         <article class="product-card" data-prod="Ghati Masala">
           <img src="images/ghati.jpg" alt="Ghati Masala">
@@ -160,11 +198,11 @@
           <div class="product-desc">Used in many family recipes — warm & aromatic.</div>
           <div class="product-actions">
             <button class="btn" data-action="prices" data-name="Ghati Masala">See Prices</button>
-            <div class="pill">Best Seller</div>
+            <div class="pill" style="background:var(--accent);padding:6px 8px;border-radius:8px;font-weight:700">Best Seller</div>
           </div>
         </article>
 
-        <article class="product-card" data-prod="Ghoda Masala">
+        <article class="product-card" data-prod="Ghoda (Kala) Masala">
           <img src="images/ghoda.jpg" alt="Ghoda Masala">
           <div class="product-name">Ghoda (Kala) Masala</div>
           <div class="product-desc">Robust, earthy spice blend for rich dishes.</div>
@@ -203,13 +241,10 @@
             <div class="pill">Tasty</div>
           </div>
         </article>
-
       </div>
 
-      <!-- Desktop grid (hidden on mobile) -->
-      <div class="card-grid" style="display:none;margin-top:18px">
-        <!-- same cards will be generated here for desktop via JS if wider screen -->
-      </div>
+      <!-- (desktop grid will be generated automatically by JS when wider screen) -->
+      <div class="card-grid" style="display:none;margin-top:18px"></div>
     </div>
   </section>
 
@@ -225,11 +260,11 @@
     </div>
   </section>
 
-  <!-- Pricing (will open modal) -->
+  <!-- Pricing (button opens modal) -->
   <section id="pricing" class="section">
     <div class="wrap">
       <h2>Prices</h2>
-      <p style="color:var(--muted)">Tap "See Prices" on any product to view the price table. Or open the full table below.</p>
+      <p style="color:var(--muted)">Tap "See Prices" on any product to view its prices. Or open the full list below.</p>
       <div style="margin-top:12px">
         <button class="btn" id="open-prices">Open Full Price List</button>
       </div>
@@ -245,8 +280,8 @@
         <p style="margin-top:8px"><strong>Phone:</strong> <a href="tel:+919820542750">982-054-2750</a></p>
         <p><strong>Email:</strong> <a href="mailto:sarojasspices@gmail.com">sarojasspices@gmail.com</a></p>
         <div style="margin-top:12px;display:flex;gap:8px">
-          <a class="btn" href="https://wa.me/919820542750" target="_blank">WhatsApp</a>
-          <a class="btn outline" href="https://instagram.com/sarojasspices/" target="_blank">Instagram</a>
+          <a class="btn" href="https://wa.me/919820542750" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="btn outline" href="https://instagram.com/sarojasspices/" target="_blank" rel="noopener">Instagram</a>
         </div>
       </div>
       <div class="map">
@@ -256,13 +291,13 @@
   </section>
 
   <footer>
-    <div class="wrap foot-inner">
+    <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;padding:14px 0">
       <div>© <span id="yr"></span> Saroja’s Spices</div>
       <div style="color:var(--muted)">Made with ♥ in Badlapur</div>
     </div>
   </footer>
 
-  <!-- WhatsApp floating button -->
+  <!-- Floating WhatsApp -->
   <a class="whatsapp-float" href="https://wa.me/919820542750" target="_blank" aria-label="WhatsApp">
     <img src="images/whatsapp.png" alt="WhatsApp">
   </a>
@@ -272,22 +307,25 @@
     <div class="modal" role="document">
       <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
         <h3 style="margin:0">Price List</h3>
-        <button class="close" id="close-overlay">✕</button>
+        <button class="close" id="close-overlay" aria-label="Close">✕</button>
       </div>
       <div id="price-content">Loading...</div>
     </div>
   </div>
 
   <script>
+    // set footer year
     document.getElementById('yr').textContent = new Date().getFullYear();
 
-    // Small reveal-on-scroll using IntersectionObserver
+    // reveal on scroll
     const io = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('show'); });
+      entries.forEach(e=>{
+        if(e.isIntersecting) e.target.classList.add('show');
+      });
     },{threshold:0.12});
     document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-    // Load prices.json and expose helper
+    // load prices.json and helpers
     let PRICES = null;
     async function loadPrices(){
       if(PRICES) return PRICES;
@@ -298,7 +336,6 @@
       }catch(err){ console.error('prices.json load failed',err); return null }
     }
 
-    // Render price table for full list
     function renderPriceTable(data){
       if(!data || !data.products) return '<p style="color:#c33">Price data unavailable</p>';
       const ths = ['Products','50g','100g','200g','500g','1kg'];
@@ -310,7 +347,7 @@
       return html;
     }
 
-    // Show overlay with either full list or single product
+    // overlay logic
     const overlay = document.getElementById('overlay');
     const priceContent = document.getElementById('price-content');
     async function openPrices(productName=null){
@@ -318,7 +355,6 @@
       const data = await loadPrices();
       if(!data){ priceContent.innerHTML = '<p style="color:#c33">Failed to load prices.</p>'; return }
       if(productName){
-        // show single product row plus small table
         const product = data.products.find(p => p.name.toLowerCase().includes(productName.toLowerCase()));
         if(!product){ priceContent.innerHTML = '<p>Product not found in price list.</p>'; return }
         let html = `<p style="margin:8px 0 6px"><strong>${product.name}</strong></p>`;
@@ -330,35 +366,53 @@
         priceContent.innerHTML = renderPriceTable(data);
       }
     }
+
     document.getElementById('open-prices').addEventListener('click',()=>openPrices());
     document.getElementById('close-overlay').addEventListener('click',()=>{overlay.classList.remove('show');overlay.setAttribute('aria-hidden','true')});
     overlay.addEventListener('click',(e)=>{ if(e.target===overlay){ overlay.classList.remove('show');overlay.setAttribute('aria-hidden','true') } });
 
-    // Attach "See Prices" buttons
-    document.querySelectorAll('[data-action="prices"]').forEach(btn=>{
-      btn.addEventListener('click',()=>{
-        const name = btn.getAttribute('data-name') || btn.closest('.product-card').dataset.prod;
-        openPrices(name);
+    // See Prices button handlers
+    function attachPriceButtons(scope=document){
+      scope.querySelectorAll('[data-action="prices"]').forEach(btn=>{
+        btn.addEventListener('click',()=>{
+          const name = btn.getAttribute('data-name') || btn.closest('.product-card').dataset.prod;
+          openPrices(name);
+        });
       });
-    });
+    }
+    attachPriceButtons();
 
-    // Responsive: move cards to grid on wider screens
+    // Responsive: create desktop grid by cloning product cards when larger
     function upgradeGrid(){
       const grid = document.querySelector('.card-grid');
+      const scrollArea = document.querySelector('.products-scroll');
       if(window.innerWidth>=820){
-        // populate grid from product cards
         if(grid && grid.children.length===0){
-          document.querySelectorAll('.product-card').forEach(card=>{ grid.appendChild(card.cloneNode(true)); });
+          document.querySelectorAll('.product-card').forEach(card=>{
+            const clone = card.cloneNode(true);
+            grid.appendChild(clone);
+          });
           grid.style.display='grid';
-          document.querySelector('.products-scroll').style.display='none';
+          grid.style.gridTemplateColumns='repeat(5,1fr)';
+          scrollArea.style.display='none';
+          // attach buttons in cloned grid
+          attachPriceButtons(grid);
         }
       }else{
         if(grid) grid.style.display='none';
-        document.querySelector('.products-scroll').style.display='flex';
+        scrollArea.style.display='flex';
       }
     }
     window.addEventListener('resize',upgradeGrid);
     upgradeGrid();
+
+    // improve keyboard accessibility: trap close overlay on Escape
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'Escape' && overlay.classList.contains('show')){
+        overlay.classList.remove('show');
+        overlay.setAttribute('aria-hidden','true');
+      }
+    });
 
   </script>
 </body>
