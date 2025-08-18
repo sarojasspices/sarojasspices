@@ -219,42 +219,47 @@
   </section>
 
   <!-- Pricing -->
-  <section id="pricing" class="pricing">
-    <div class="container">
-      <p class="notice">Free shipping on all orders above ₹1,500.</p>
-      <div class="pricing-wrap">
-        <div class="price-left">
-          <h2>Price Drop<br/>Order Now!</h2>
-          <p>Great news for spice enthusiasts and culinary adventurers! The spices you love are now more affordable than ever with our latest price drop. Whether you're a fan of aromatic cumin, fiery cayenne, or exotic cardamom, this is the perfect opportunity to stock up on your favourites and experiment with new flavors. Spices not only enhance the taste of your dishes but also offer numerous health benefits, making them a staple in every kitchen. So, why not take advantage of these fantastic savings and add a little extra zest to your meals? Don't miss out on the chance to elevate your cooking game without breaking the bank.</p>
-        </div>
-        <div class="price-table">
-          <table>
-            <thead>
-              <tr>
-                <th>Products</th>
-                <th>50 Grams</th>
-                <th>100 Grams</th>
-                <th>200 Grams</th>
-                <th>500 Grams</th>
-                <th>1 KG</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td><b>Ghati Masala</b><br><small>(Used in Food Recipe)</small></td><td>50</td><td>90</td><td>160</td><td>360</td><td>650</td></tr>
-              <tr><td><b>Ghoda (Kala Masala)</b><br><small>(Used in Food Recipe)</small></td><td>50</td><td>90</td><td>160</td><td>360</td><td>650</td></tr>
-              <tr><td><b>Sambhar Masala</b><br><small>(Soul of the Delicacy)</small></td><td>50</td><td>90</td><td>160</td><td>360</td><td>650</td></tr>
-              <tr><td><b>Jawas Chutney</b><br><small>(It's often served as a side dish)</small></td><td>40</td><td>70</td><td>125</td><td>230</td><td>450</td></tr>
-              <tr><td><b>Dry Peanut Chutney</b><br><small>(It's often served as a side dish)</small></td><td>35</td><td>60</td><td>110</td><td>210</td><td>400</td></tr>
-              <tr><td><b>Veg Biryani Masala</b><br><small>(Soul of the Delicacy)</small></td><td>60</td><td>105</td><td>190</td><td>425</td><td>760</td></tr>
-              <tr><td><b>Chicken Biryani Masala</b><br><small>(Soul of the Delicacy)</small></td><td>60</td><td>105</td><td>190</td><td>425</td><td>760</td></tr>
-              <tr><td><b>Magic Mutton Masala</b><br><small>(Food Recipe)</small></td><td>60</td><td>105</td><td>190</td><td>425</td><td>760</td></tr>
-              <tr><td><b>Dhana Jeera Powder</b><br><small>(Used in Food Recipe)</small></td><td>40</td><td>70</td><td>125</td><td>230</td><td>450</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </section>
+<section id="price-list">
+  <h2>Our Price List</h2>
+  <div class="table-container">
+    <table id="price-table">
+      <thead>
+        <tr>
+          <th>Products</th>
+          <th>50 Grams</th>
+          <th>100 Grams</th>
+          <th>200 Grams</th>
+          <th>500 Grams</th>
+          <th>1 KG</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Data will be inserted here -->
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<script>
+  fetch('prices.json')
+    .then(response => response.json())
+    .then(data => {
+      const tbody = document.querySelector("#price-table tbody");
+      data.products.forEach(item => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${item.name}</td>
+          <td>${item["50g"]}</td>
+          <td>${item["100g"]}</td>
+          <td>${item["200g"]}</td>
+          <td>${item["500g"]}</td>
+          <td>${item["1kg"]}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    })
+    .catch(error => console.error('Error loading prices:', error));
+</script>
 
   <!-- Contact -->
   <section id="contact" class="contact">
