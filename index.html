@@ -1,311 +1,365 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Saroja’s Spices</title>
-  <meta name="description" content="Saroja’s Spices – premium Indian spice blends and single-origin spices. Wholesale & retail. Badlapur, Maharashtra." />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Saroja’s Spices — Make your Food Tasty</title>
+  <meta name="description" content="Saroja’s Spices — premium Indian spice blends. Order via WhatsApp. Badlapur, Maharashtra."/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Display fonts roughly matching your Canva look -->
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
+    /* --- Design tokens --- */
     :root{
-      --brand:#f38442;      /* Orange background */
-      --text:#111;          /* Body text */
-      --muted:#444;         /* Secondary text */
-      --card:#fff;          /* Cards */
-      --max:1200px;         /* Max content width */
-      --radius:22px;        /* Big rounded corners */
+      --brand:#f26f2b; /* warm orange */
+      --accent:#ffb57b;
+      --bg:#fffaf6;
+      --muted:#6b6b6b;
+      --text:#222;
+      --card:#ffffff;
+      --radius:14px;
+      --container:1100px;
     }
+    /* --- Reset & base --- */
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
-    body{margin:0;font-family:"DM Sans",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);background:#fff}
-    h1,h2,h3{font-family:"Montserrat",system-ui,Segoe UI,Roboto,Arial,sans-serif;line-height:1.1;margin:0 0 .5rem}
-    h1{font-size:clamp(2.2rem,6vw,4.5rem);font-weight:900}
-    h2{font-size:clamp(1.8rem,4.5vw,3rem);font-weight:900}
-    p{font-size:clamp(1rem,1.4vw,1.25rem);line-height:1.7;margin:0 0 1rem;color:var(--muted)}
+    body{margin:0;font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased}
+    img{display:block;max-width:100%;height:auto}
     a{color:inherit;text-decoration:none}
-    img{max-width:100%;display:block}
 
-    /* Header / Nav */
-    header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #eee}
-    .nav{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:.6rem 1rem}
-    .brand{display:flex;align-items:center;gap:.75rem}
+    /* --- Layout container --- */
+    .wrap{max-width:var(--container);margin:0 auto;padding:0 16px}
 
-    /* NEW: simple FSSAI logo + text side-by-side */
-    .fssai{display:inline-flex;align-items:center;gap:.5rem}
-    .fssai img{height:28px;width:auto;display:block}
-    .fssai .id{font-weight:800;font-size:.9rem;letter-spacing:.3px;color:#2e2e2e;white-space:nowrap}
+    /* --- Top bar / header --- */
+    header{position:sticky;top:0;background:white;z-index:60;border-bottom:1px solid rgba(0,0,0,0.06)}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
+    .brand{display:flex;flex-direction:column;line-height:1}
+    .brand .name{font-weight:700;font-size:1.05rem;color:var(--text);letter-spacing:0.2px}
+    .brand .tag{font-size:0.85rem;color:var(--muted)}
+    .nav-right{display:flex;gap:12px;align-items:center}
+    .fssai{display:flex;align-items:center;gap:8px}
+    .fssai img{height:26px}
+    .fssai .id{font-size:0.82rem;color:var(--muted);font-weight:600}
+    .menu{display:flex;gap:10px}
+    .menu a{font-weight:600;color:var(--muted);padding:8px;border-radius:10px}
+    .menu a:hover{background:rgba(0,0,0,0.03)}
 
-    nav ul{display:flex;gap:1rem;margin:0;padding:0;list-style:none;font-weight:800}
-    nav a{padding:.5rem .7rem;border-radius:10px}
-    nav a:hover{background:#f7f7f7}
+    /* --- Hero --- */
+    .hero{background:linear-gradient(180deg,var(--brand),var(--accent));color:#1a130f;padding:36px 0 28px;border-bottom-left-radius:24px;border-bottom-right-radius:24px}
+    .hero .hero-inner{display:flex;gap:20px;align-items:center}
+    .hero-left{flex:1}
+    .hero h1{font-size:clamp(1.6rem,6vw,2.6rem);margin:0 0 8px;line-height:1}
+    .hero p{margin:0 0 14px;color:#2b1f19;font-weight:600}
+    .cta-row{display:flex;gap:10px;flex-wrap:wrap}
+    .btn{background:#000;color:white;padding:10px 14px;border-radius:10px;font-weight:700;display:inline-block}
+    .btn.outline{background:transparent;color:#000;border:2px solid rgba(0,0,0,0.06)}
+    .hero-right{width:220px;border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.12)}
 
-    /* Sections */
-    section{scroll-margin-top:76px}
-    .container{max-width:var(--max);margin:0 auto;padding:4rem 1rem}
+    /* --- Product showcase (mobile-first) --- */
+    .section{padding:28px 0}
+    .section h2{font-size:1.25rem;margin:0 0 14px}
 
-    /* Hero */
-    .hero{background:var(--brand);color:#000}
-    .hero .container{padding:3.5rem 1rem 2rem}
-    .hero h1{color:#000}
-    .hero p{color:#251e18;font-weight:600}
-    .hero-visual{margin:2rem auto 0;max-width:1000px;border-radius:12px;overflow:hidden}
+    .products-scroll{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x mandatory}
+    .product-card{min-width:200px;flex:0 0 70%;background:var(--card);border-radius:12px;padding:10px;box-shadow:0 8px 24px rgba(0,0,0,0.06);scroll-snap-align:center}
+    .product-card img{border-radius:10px;height:160px;object-fit:cover}
+    .product-name{font-weight:700;margin:8px 0 6px}
+    .product-desc{font-size:0.95rem;color:var(--muted);margin-bottom:8px}
+    .product-actions{display:flex;gap:8px}
+    .pill{background:var(--accent);padding:6px 8px;border-radius:8px;font-weight:700}
 
-    /* About */
-    .about{background:#fff}
-    .grid{display:grid;grid-template-columns:1.1fr 1fr;gap:2rem;align-items:center}
-    .about img{border-radius:10px}
-
-    /* Why Us card list */
-    .why .wrap{display:grid;grid-template-columns:1fr 1.2fr;gap:2rem;align-items:center}
-    .why-card{background:var(--brand);border-radius:var(--radius);padding:2rem;box-shadow:0 10px 25px rgba(0,0,0,.08)}
-    .why-item{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start;margin-bottom:1.3rem}
-    .why-num{width:42px;height:42px;border-radius:999px;background:#000;color:#fff;font-weight:900;display:grid;place-items:center}
-    .why h3{margin:0 0 .25rem}
-
-    /* Products */
-    .products h2{text-align:center;margin-bottom:2rem}
-    .card-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1.2rem}
-    .card{background:var(--card);border-radius:18px;overflow:hidden;box-shadow:0 10px 20px rgba(0,0,0,.06);border:1px solid #f0f0f0;display:flex;flex-direction:column}
-    .card img{aspect-ratio:4/5;object-fit:cover}
-    .card .title{background:var(--brand);padding:1rem 1.25rem;font-weight:900;text-align:center}
-
-    /* Pricing */
-    .pricing{background:var(--brand)}
-    .pricing .container{padding-top:2rem}
-    .notice{text-align:center;font-weight:700;margin-bottom:1rem}
-    .pricing-wrap{display:grid;grid-template-columns:1fr 1.2fr;gap:2rem;align-items:start}
-    .price-left h2{font-size:3rem;line-height:1.05;margin-bottom:1rem;text-shadow:6px 8px 0 rgba(0,0,0,.1)}
-    .price-left p{color:#111}
-    table{width:100%;border-collapse:collapse;background:#fffcf9;border-radius:12px;overflow:hidden}
-    th,td{border:3px solid rgba(0,0,0,.08);padding:.8rem .7rem;text-align:center}
-    th{background:rgba(255,255,255,.85);font-weight:900}
-
-    /* Contact */
-    .contact{background:var(--brand)}
-    .contact h2{text-align:center;margin-bottom:1rem}
-    .contact-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:2rem;align-items:start}
-    .info dt{font-weight:900;margin:.6rem 0 .25rem}
-    .cta-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:1.5rem}
-    .cta{display:grid;place-items:center;padding:1rem;border-radius:16px;background:#fff;box-shadow:0 8px 18px rgba(0,0,0,.08);font-weight:800}
-    .map iframe{width:100%;height:280px;border:0;border-radius:14px}
-
-    /* Footer */
-    footer{border-top:1px solid #eee}
-    footer .container{display:flex;justify-content:space-between;gap:1rem;padding:1.2rem}
-    .tiny{color:#666;font-size:.9rem}
-
-    /* Responsive */
-    @media (max-width:1100px){
-      .grid,.why .wrap,.pricing-wrap,.contact-grid{grid-template-columns:1fr}
-      .card-grid{grid-template-columns:repeat(3,1fr)}
+    /* On larger screens, show grid */
+    @media(min-width:820px){
+      .hero .hero-inner{align-items:center}
+      .hero-right{width:360px}
+      .product-card{min-width:0;flex:1;scroll-snap-align:none}
+      .card-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
+      .products-scroll{overflow:visible}
     }
-    @media (max-width:700px){
-      nav ul{display:none} /* keep it minimal on very small screens */
-      .card-grid{grid-template-columns:repeat(2,1fr)}
-      .cta-row{grid-template-columns:repeat(2,1fr)}
-      .fssai img{height:24px}
-      .fssai .id{font-size:.85rem}
-    }
+
+    /* --- Price modal / table --- */
+    .overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);z-index:120;padding:20px}
+    .overlay.show{display:flex}
+    .modal{background:white;border-radius:12px;max-width:900px;width:100%;max-height:90vh;overflow:auto;padding:18px}
+    .modal .close{float:right;background:#eee;border-radius:8px;padding:6px;cursor:pointer}
+    .price-table{width:100%;border-collapse:collapse;margin-top:8px}
+    .price-table th,.price-table td{padding:10px;border-bottom:1px solid #f0e8e0;text-align:center}
+    .price-table thead th{background:var(--brand);color:white;font-weight:700}
+    .product-name-left{text-align:left;padding-left:12px;font-weight:700}
+
+    /* --- Testimonials --- */
+    .testimonials-grid{display:grid;grid-template-columns:1fr;gap:12px}
+    .test-card{background:var(--card);padding:12px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.05)}
+    .test-card p{margin:0;color:var(--muted);font-style:italic}
+    .test-card strong{display:block;margin-top:8px;color:var(--text)}
+    @media(min-width:900px){.testimonials-grid{grid-template-columns:repeat(3,1fr)}}
+
+    /* --- Contact & WhatsApp CTA --- */
+    .contact-grid{display:grid;grid-template-columns:1fr;gap:12px}
+    @media(min-width:900px){.contact-grid{grid-template-columns:1.2fr 1fr}}
+    .whatsapp-float{position:fixed;right:18px;bottom:18px;background:#25D366;border-radius:50%;width:56px;height:56px;display:grid;place-items:center;z-index:140;box-shadow:0 10px 30px rgba(0,0,0,0.2)}
+    .whatsapp-float img{width:28px}
+
+    /* --- Reveal animation --- */
+    .reveal{opacity:0;transform:translateY(18px);transition:all .6s cubic-bezier(.2,.9,.3,1)}
+    .reveal.show{opacity:1;transform:none}
+
+    /* --- Footer --- */
+    footer{padding:18px 0;background:#fff;border-top:1px solid rgba(0,0,0,0.04);margin-top:28px}
+    footer .foot-inner{display:flex;justify-content:space-between;align-items:center;gap:12px}
+    @media(max-width:700px){.hero-right{display:none}.brand{align-items:flex-start}}
   </style>
 </head>
 <body>
-  <!-- Header -->
   <header>
-    <div class="nav">
+    <div class="wrap nav">
       <div class="brand">
-        <!-- FSSAI logo with license number to the right -->
-        <div class="fssai" aria-label="FSSAI license 21525022001241">
-          <img src="images/fssai.png" alt="FSSAI logo">
-          <span class="id">Lic. No. 21525022001241</span>
+        <div class="name">Saroja’s Spices</div>
+        <div class="tag">Make your Food Tasty</div>
+      </div>
+
+      <div class="nav-right">
+        <nav class="menu" aria-label="Primary">
+          <a href="#products">Our Special</a>
+          <a href="#pricing">Prices</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <div class="fssai" aria-hidden="false">
+          <img src="images/fssai.png" alt="FSSAI">
+          <div class="id">Lic. No. 21525022001241</div>
         </div>
       </div>
-      <nav aria-label="Primary">
-        <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About us</a></li>
-          <li><a href="#why">Why us?</a></li>
-          <li><a href="#products">Products</a></li>
-          <li><a href="#pricing">Pricing</a></li>
-          <li><a href="#contact">Contact us</a></li>
-        </ul>
-      </nav>
     </div>
   </header>
 
-  <!-- Hero / Home -->
-  <section id="home" class="hero" aria-label="Hero">
-    <div class="container">
-      <h1>Saroja’s Spices</h1>
-      <p>Make your Food Tasty</p>
-      <div class="hero-visual">
-        <img src="images/banner.jpg" alt="Jars and bowls of Indian spices" />
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div class="hero-left">
+        <h1>Saroja’s Spices</h1>
+        <p>Make your Food Tasty — premium blends & authentic flavours from Badlapur.</p>
+        <div class="cta-row">
+          <a class="btn" href="https://wa.me/919820542750" target="_blank">Order on WhatsApp</a>
+          <a class="btn outline" href="#products">Explore Specials</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <img src="images/banner.jpg" alt="Spices banner">
       </div>
     </div>
   </section>
 
-  <!-- About -->
-  <section id="about" class="about">
-    <div class="container grid">
-      <div>
-        <img src="images/about.jpg" alt="Assorted spices in bowls" />
-      </div>
-      <div>
-        <h2>About us</h2>
-        <p>Saroja's Spices is a premium provider of authentic, high-quality spices to elevate culinary experiences. We source the finest ingredients, crafting exceptional spice blends and single-origin spices that capture the rich flavors and aromas of traditional Indian cuisine. Our offerings include signature blends and customized spice solutions to meet diverse customer needs. We also deal in wholesale orders for hotels & restaurants. We prioritize sourcing excellence, authenticity, quality, and customer focus. Saroja's Spices empowers food enthusiasts to create memorable, flavorful dishes with our premium spices.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Why Us -->
-  <section id="why" class="why">
-    <div class="container wrap">
-      <div>
-        <h2>A Matter of Taste</h2>
-        <p>There is a reason our regulars have been coming back for more. Word of mouth has been our only advertisement – but happy mouths are the best ambassadors!</p>
-      </div>
-      <div class="why-card">
-        <div class="why-item">
-          <div class="why-num">1</div>
-          <div>
-            <h3>Unleash a Symphony of Flavours</h3>
-            <p>Step into a world where aromas dance and colours ignite. From the warmth of cinnamon to the fiery kiss of chilli, discover a curated collection of the finest spices to elevate your culinary creations. Your journey to flavour begins here.</p>
-          </div>
-        </div>
-        <div class="why-item">
-          <div class="why-num">2</div>
-          <div>
-            <h3>Elevate Your Cooking</h3>
-            <p>Discover a world of flavor with our premium selection of spices, carefully sourced to bring depth and aroma to every dish.</p>
-          </div>
-        </div>
-        <div class="why-item" style="margin-bottom:0">
-          <div class="why-num">3</div>
-          <div>
-            <h3>Quality You Can Taste</h3>
-            <p>Experience the difference of freshly ground and high-quality spices that will truly transform your meals.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Products -->
-  <section id="products" class="products">
-    <div class="container">
+  <!-- Products / Our Special -->
+  <section id="products" class="section">
+    <div class="wrap">
       <h2>Our Special</h2>
-      <div class="card-grid">
-        <article class="card"><img src="images/ghati.jpg" alt="Ghati Masala"><div class="title">GHATI MASALA</div></article>
-        <article class="card"><img src="images/ghoda.jpg" alt="Ghoda Masala (Kala)"><div class="title">GHODA MASALA</div></article>
-        <article class="card"><img src="images/sambar.jpg" alt="Sambhar Masala"><div class="title">SAMBHAR MASALA</div></article>
-        <article class="card"><img src="images/jawas.jpg" alt="Jawas Chutney"><div class="title">JAWAS CHUTNEY</div></article>
-        <article class="card"><img src="images/peanut.jpg" alt="Dry Peanut Chutney"><div class="title">DRY PEANUT<br/>CHUTNEY</div></article>
+      <!-- mobile horizontal scroll, desktop grid -->
+      <div class="products-scroll reveal" id="products-scroll">
+        <article class="product-card" data-prod="Ghati Masala">
+          <img src="images/ghati.jpg" alt="Ghati Masala">
+          <div class="product-name">Ghati Masala</div>
+          <div class="product-desc">Used in many family recipes — warm & aromatic.</div>
+          <div class="product-actions">
+            <button class="btn" data-action="prices" data-name="Ghati Masala">See Prices</button>
+            <div class="pill">Best Seller</div>
+          </div>
+        </article>
+
+        <article class="product-card" data-prod="Ghoda Masala">
+          <img src="images/ghoda.jpg" alt="Ghoda Masala">
+          <div class="product-name">Ghoda (Kala) Masala</div>
+          <div class="product-desc">Robust, earthy spice blend for rich dishes.</div>
+          <div class="product-actions">
+            <button class="btn" data-action="prices" data-name="Ghoda (Kala) Masala">See Prices</button>
+            <div class="pill">Traditional</div>
+          </div>
+        </article>
+
+        <article class="product-card" data-prod="Sambhar Masala">
+          <img src="images/sambar.jpg" alt="Sambhar Masala">
+          <div class="product-name">Sambhar Masala</div>
+          <div class="product-desc">Soul of the delicacy — make every sambhar sing.</div>
+          <div class="product-actions">
+            <button class="btn" data-action="prices" data-name="Sambhar Masala">See Prices</button>
+            <div class="pill">Classic</div>
+          </div>
+        </article>
+
+        <article class="product-card" data-prod="Jawas Chutney">
+          <img src="images/jawas.jpg" alt="Jawas Chutney">
+          <div class="product-name">Jawas Chutney</div>
+          <div class="product-desc">Aromatic chutney powder — bright & tangy sidekick.</div>
+          <div class="product-actions">
+            <button class="btn" data-action="prices" data-name="Jawas Chutney">See Prices</button>
+            <div class="pill">Fresh</div>
+          </div>
+        </article>
+
+        <article class="product-card" data-prod="Dry Peanut Chutney">
+          <img src="images/peanut.jpg" alt="Dry Peanut Chutney">
+          <div class="product-name">Dry Peanut Chutney</div>
+          <div class="product-desc">Crunchy, nutty, and perfect with dosa/idli.</div>
+          <div class="product-actions">
+            <button class="btn" data-action="prices" data-name="Dry Peanut Chutney">See Prices</button>
+            <div class="pill">Tasty</div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Desktop grid (hidden on mobile) -->
+      <div class="card-grid" style="display:none;margin-top:18px">
+        <!-- same cards will be generated here for desktop via JS if wider screen -->
       </div>
     </div>
   </section>
 
   <!-- Testimonials -->
-  <section id="testimonials" class="testimonials">
-    <div class="container" style="text-align:center">
+  <section id="testimonials" class="section">
+    <div class="wrap">
       <h2>What Our Customers Say</h2>
-      <div style="max-width:800px;margin:1rem auto 0">
-        <p style="font-style:italic;color:#555">"Sarojasspices products are always fresh and full of flavor. My family loves the sambar masala!"</p>
-        <p style="font-style:italic;color:#555">"Quality you can taste. The peanut chutney adds a perfect punch to every meal."</p>
-        <p style="font-style:italic;color:#555">"Great packaging and genuine spices. Highly recommended!"</p>
+      <div class="testimonials-grid reveal">
+        <div class="test-card"><p>"Sarojasspices products are always fresh and full of flavor. My family loves the sambar masala!"</p><strong>— Anita D.</strong></div>
+        <div class="test-card"><p>"Quality you can taste. The peanut chutney adds a perfect punch to every meal."</p><strong>— Ravi K.</strong></div>
+        <div class="test-card"><p>"Great packaging and genuine spices. Highly recommended!"</p><strong>— Sneha P.</strong></div>
       </div>
     </div>
   </section>
 
-  <!-- Pricing -->
-<section id="price-list">
-  <h2>Our Price List</h2>
-  <div class="table-container">
-    <table id="price-table">
-      <thead>
-        <tr>
-          <th>Products</th>
-          <th>50 Grams</th>
-          <th>100 Grams</th>
-          <th>200 Grams</th>
-          <th>500 Grams</th>
-          <th>1 KG</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Data will be inserted here -->
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<script>
-  fetch('prices.json')
-    .then(response => response.json())
-    .then(data => {
-      const tbody = document.querySelector("#price-table tbody");
-      data.products.forEach(item => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-          <td>${item.name}</td>
-          <td>${item["50g"]}</td>
-          <td>${item["100g"]}</td>
-          <td>${item["200g"]}</td>
-          <td>${item["500g"]}</td>
-          <td>${item["1kg"]}</td>
-        `;
-        tbody.appendChild(row);
-      });
-    })
-    .catch(error => console.error('Error loading prices:', error));
-</script>
+  <!-- Pricing (will open modal) -->
+  <section id="pricing" class="section">
+    <div class="wrap">
+      <h2>Prices</h2>
+      <p style="color:var(--muted)">Tap "See Prices" on any product to view the price table. Or open the full table below.</p>
+      <div style="margin-top:12px">
+        <button class="btn" id="open-prices">Open Full Price List</button>
+      </div>
+    </div>
+  </section>
 
   <!-- Contact -->
-  <section id="contact" class="contact">
-    <div class="container">
-      <h2>Do visit us soon!</h2>
-      <div class="contact-grid">
-        <div>
-          <dl class="info">
-            <dt>Store</dt>
-            <dd><a href="https://g.co/kgs/PLACE_ID" target="_blank" rel="noopener">Saroja's Spices</a></dd>
-            <dt>Email Address</dt>
-            <dd><a href="mailto:sarojasspices@gmail.com">sarojasspices@gmail.com</a></dd>
-            <dt>Phone Number</dt>
-            <dd><a href="tel:+919820542750">982-054-2750</a></dd>
-            <dt>Instagram</dt>
-            <dd><a href="https://instagram.com/sarojasspices/" target="_blank" rel="noopener">instagram.com/sarojasspices/</a></dd>
-            <dt>Address</dt>
-            <dd>203, Rubiyana Residency, Behind HP Petrol Pump, Katrap, Badlapur East 421503</dd>
-          </dl>
-
-          <div class="cta-row">
-            <a class="cta" href="tel:+919820542750">Call</a>
-            <a class="cta" href="https://wa.me/919820542750" target="_blank" rel="noopener">WhatsApp</a>
-            <a class="cta" href="mailto:sarojasspices@gmail.com">Email</a>
-            <a class="cta" href="https://instagram.com/sarojasspices/" target="_blank" rel="noopener">Instagram</a>
-          </div>
+  <section id="contact" class="section">
+    <div class="wrap contact-grid">
+      <div>
+        <h2>Contact & Visit</h2>
+        <p style="color:var(--muted)">203, Rubiyana Residency, Behind HP Petrol Pump, Katrap, Badlapur East 421503</p>
+        <p style="margin-top:8px"><strong>Phone:</strong> <a href="tel:+919820542750">982-054-2750</a></p>
+        <p><strong>Email:</strong> <a href="mailto:sarojasspices@gmail.com">sarojasspices@gmail.com</a></p>
+        <div style="margin-top:12px;display:flex;gap:8px">
+          <a class="btn" href="https://wa.me/919820542750" target="_blank">WhatsApp</a>
+          <a class="btn outline" href="https://instagram.com/sarojasspices/" target="_blank">Instagram</a>
         </div>
-        <div class="map">
-          <iframe loading="lazy" allowfullscreen
-            referrerpolicy="no-referrer-when-downgrade"
-            src="https://www.google.com/maps?q=Rubiyana%20Residency%2C%20Behind%20HP%20Petrol%20Pump%2C%20Katrap%2C%20Badlapur%20East%20421503&output=embed"></iframe>
-        </div>
+      </div>
+      <div class="map">
+        <iframe loading="lazy" src="https://www.google.com/maps?q=Rubiyana%20Residency%2C%20Behind%20HP%20Petrol%20Pump%2C%20Katrap%2C%20Badlapur%20East%20421503&output=embed" style="width:100%;height:260px;border:0;border-radius:10px"></iframe>
       </div>
     </div>
   </section>
 
   <footer>
-    <div class="container">
-      <div class="tiny">© <span id="yr"></span> Saroja’s Spices • FSSAI 21525022001241</div>
-      <div class="tiny">Made with ♥ in Badlapur</div>
+    <div class="wrap foot-inner">
+      <div>© <span id="yr"></span> Saroja’s Spices</div>
+      <div style="color:var(--muted)">Made with ♥ in Badlapur</div>
     </div>
   </footer>
 
+  <!-- WhatsApp floating button -->
+  <a class="whatsapp-float" href="https://wa.me/919820542750" target="_blank" aria-label="WhatsApp">
+    <img src="images/whatsapp.png" alt="WhatsApp">
+  </a>
+
+  <!-- Price modal overlay -->
+  <div id="overlay" class="overlay" role="dialog" aria-hidden="true">
+    <div class="modal" role="document">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+        <h3 style="margin:0">Price List</h3>
+        <button class="close" id="close-overlay">✕</button>
+      </div>
+      <div id="price-content">Loading...</div>
+    </div>
+  </div>
+
   <script>
-    // Set current year in footer
     document.getElementById('yr').textContent = new Date().getFullYear();
+
+    // Small reveal-on-scroll using IntersectionObserver
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('show'); });
+    },{threshold:0.12});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+    // Load prices.json and expose helper
+    let PRICES = null;
+    async function loadPrices(){
+      if(PRICES) return PRICES;
+      try{
+        const res = await fetch('prices.json');
+        PRICES = await res.json();
+        return PRICES;
+      }catch(err){ console.error('prices.json load failed',err); return null }
+    }
+
+    // Render price table for full list
+    function renderPriceTable(data){
+      if(!data || !data.products) return '<p style="color:#c33">Price data unavailable</p>';
+      const ths = ['Products','50g','100g','200g','500g','1kg'];
+      let html = '<div style="overflow:auto"><table class="price-table"><thead><tr>'+ths.map(t=>`<th>${t}</th>`).join('')+'</tr></thead><tbody>';
+      data.products.forEach(p=>{
+        html += `<tr><td class="product-name-left">${p.name}</td><td>${p['50g']}</td><td>${p['100g']}</td><td>${p['200g']}</td><td>${p['500g']}</td><td>${p['1kg']}</td></tr>`;
+      });
+      html += '</tbody></table></div>';
+      return html;
+    }
+
+    // Show overlay with either full list or single product
+    const overlay = document.getElementById('overlay');
+    const priceContent = document.getElementById('price-content');
+    async function openPrices(productName=null){
+      overlay.setAttribute('aria-hidden','false'); overlay.classList.add('show');
+      const data = await loadPrices();
+      if(!data){ priceContent.innerHTML = '<p style="color:#c33">Failed to load prices.</p>'; return }
+      if(productName){
+        // show single product row plus small table
+        const product = data.products.find(p => p.name.toLowerCase().includes(productName.toLowerCase()));
+        if(!product){ priceContent.innerHTML = '<p>Product not found in price list.</p>'; return }
+        let html = `<p style="margin:8px 0 6px"><strong>${product.name}</strong></p>`;
+        html += '<table class="price-table"><thead><tr><th>50g</th><th>100g</th><th>200g</th><th>500g</th><th>1kg</th></tr></thead><tbody>';
+        html += `<tr><td>${product['50g']}</td><td>${product['100g']}</td><td>${product['200g']}</td><td>${product['500g']}</td><td>${product['1kg']}</td></tr>`;
+        html += '</tbody></table>';
+        priceContent.innerHTML = html;
+      }else{
+        priceContent.innerHTML = renderPriceTable(data);
+      }
+    }
+    document.getElementById('open-prices').addEventListener('click',()=>openPrices());
+    document.getElementById('close-overlay').addEventListener('click',()=>{overlay.classList.remove('show');overlay.setAttribute('aria-hidden','true')});
+    overlay.addEventListener('click',(e)=>{ if(e.target===overlay){ overlay.classList.remove('show');overlay.setAttribute('aria-hidden','true') } });
+
+    // Attach "See Prices" buttons
+    document.querySelectorAll('[data-action="prices"]').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        const name = btn.getAttribute('data-name') || btn.closest('.product-card').dataset.prod;
+        openPrices(name);
+      });
+    });
+
+    // Responsive: move cards to grid on wider screens
+    function upgradeGrid(){
+      const grid = document.querySelector('.card-grid');
+      if(window.innerWidth>=820){
+        // populate grid from product cards
+        if(grid && grid.children.length===0){
+          document.querySelectorAll('.product-card').forEach(card=>{ grid.appendChild(card.cloneNode(true)); });
+          grid.style.display='grid';
+          document.querySelector('.products-scroll').style.display='none';
+        }
+      }else{
+        if(grid) grid.style.display='none';
+        document.querySelector('.products-scroll').style.display='flex';
+      }
+    }
+    window.addEventListener('resize',upgradeGrid);
+    upgradeGrid();
+
   </script>
 </body>
 </html>
