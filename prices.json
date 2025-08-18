@@ -1,0 +1,76 @@
+{
+  "products": [
+    {
+      "name": "Ghati Masala (Used in Food Recipe)",
+      "50g": 50,
+      "100g": 90,
+      "200g": 160,
+      "500g": 360,
+      "1kg": 650
+    },
+    {
+      "name": "Ghoda (Kala Masala) (Used in Food Recipe)",
+      "50g": 50,
+      "100g": 90,
+      "200g": 160,
+      "500g": 360,
+      "1kg": 650
+    },
+    {
+      "name": "Sambhar Masala (Soul of the Delicacy)",
+      "50g": 50,
+      "100g": 90,
+      "200g": 160,
+      "500g": 360,
+      "1kg": 650
+    },
+    {
+      "name": "Jawas Chutney (It's often served as a side dish)",
+      "50g": 40,
+      "100g": 70,
+      "200g": 125,
+      "500g": 230,
+      "1kg": 450
+    },
+    {
+      "name": "Dry Peanut Chutney (It's often served as a side dish)",
+      "50g": 35,
+      "100g": 60,
+      "200g": 110,
+      "500g": 210,
+      "1kg": 400
+    },
+    {
+      "name": "Veg Biryani Masala (Soul of the Delicacy)",
+      "50g": 60,
+      "100g": 105,
+      "200g": 190,
+      "500g": 425,
+      "1kg": 760
+    },
+    {
+      "name": "Chicken Biryani Masala (Soul of the Delicacy)",
+      "50g": 60,
+      "100g": 105,
+      "200g": 190,
+      "500g": 425,
+      "1kg": 760
+    },
+    {
+      "name": "Magic Mutton Masala (Food Recipe)",
+      "50g": 60,
+      "100g": 105,
+      "200g": 190,
+      "500g": 425,
+      "1kg": 760
+    },
+    {
+      "name": "Dhana Jeera Powder (Used in Food Recipe)",
+      "50g": 40,
+      "100g": 70,
+      "200g": 125,
+      "500g": 230,
+      "1kg": 450
+    }
+  ]
+}
