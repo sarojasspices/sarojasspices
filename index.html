@@ -92,6 +92,8 @@
     .section{padding:22px 0}
     .section h2{font-size:1.1rem;margin:0 0 12px}
 
+
+    
 /* Product showcase - mobile first */
 .products-scroll{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
 .product-card{
@@ -102,9 +104,12 @@
     padding:10px;
     box-shadow:0 8px 24px rgba(0,0,0,0.06);
     scroll-snap-align:center;
+    
+    /* Ensure the card is a vertical flex container and has a fixed height */
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 300px; /* Use a fixed height for a consistent look. Adjust as needed. */
 } 
 .product-card img{
     border-radius:10px;
@@ -118,12 +123,18 @@
     gap: 8px;
     align-items: center;
     width: 100%;
+    
+    /* Push this element to the bottom of the card */
+    margin-top: auto;
 }
           
 .product-actions > * {
     flex-grow: 1;
 }
 
+
+
+    
     /* Desktop: grid */
     @media(min-width:820px){
       .hero-right{width:340px;height:220px}
