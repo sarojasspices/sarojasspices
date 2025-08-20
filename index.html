@@ -37,7 +37,8 @@
       align-items:center;
       justify-content:center;
       gap:10px;
-      min-height:46px;
+      min-height:auto; 
+      max-height: calc(1.3 * 36px);
     }
     .fssai-logo{
       height:36px; width:auto; display:block;
@@ -45,8 +46,10 @@
     .fssai-id{
       font-weight:700;
       color:var(--muted);
-      font-size:13px;
+      font-size:12px;
       letter-spacing:0.2px;
+      line-height: 1;
+      align-self: center;
     }
 
     /* NAV RIBBON (sticky) */
