@@ -181,10 +181,56 @@
     button:focus, a:focus { outline: 3px solid rgba(0,0,0,0.08); outline-offset: 2px; }
 
     /* Gmap    */
-    .map-container {
-    width: 80%;
-    margin: 0 auto; /* This centers the container horizontally */
-    }
+                  /*
+                This ensures the map container itself is a responsive box.
+                The padding-bottom trick creates a container that maintains
+                a specific aspect ratio (in this case, 4:3).
+              */
+              .map-container {
+                /* This is the key to creating a responsive aspect ratio */
+                position: relative;
+                padding-bottom: 75%; /* (450 / 600) * 100% = 75% */
+                height: 0;
+                overflow: hidden;
+                /* This is crucial for overriding the grid item's default behavior */
+                width: 100%;
+              }
+              
+              /*
+                This makes the iframe fill the entire responsive container,
+                ensuring it scales with the parent.
+              */
+              .map-container iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+              }
+              
+              /* Media Query for Desktop Users
+                This centers the map and makes it 80% wide on larger screens.
+                The `justify-content` and `width` on the grid container
+                will handle the centering.
+              */
+              @media (min-width: 769px) {
+                /* Set a max-width for the map on larger screens */
+                .map-container {
+                  max-width: 80%; /* Limits the width to 80% */
+                  margin: 0 auto; /* This centers the container on the page */
+                  /* Remove this if the parent grid container handles the centering */
+                }
+              }
+              
+              /* Media Query for Mobile Users
+                This ensures the map takes full width on smaller screens,
+                allowing it to stack properly within the grid layout.
+              */
+              @media (max-width: 768px) {
+                .map-container {
+                  width: 100%; /* The map will take up the full width on smaller screens */
+                }
+              }
 
   </style>
 </head>
