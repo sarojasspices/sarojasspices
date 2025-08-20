@@ -98,7 +98,15 @@
     .product-card img{border-radius:10px;height:150px;object-fit:cover; margin: 0 auto; align-items: center; }
     .product-name{font-weight:700;margin:8px 0 6px}
     .product-desc{font-size:0.95rem;color:var(--muted);margin-bottom:8px}
-    .product-actions{display:flex;gap:8px;align-items:center}
+    .product-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+          }
+          
+          .product-actions > * {
+            flex-grow: 1; /* Both items will grow to fill the remaining space equally */
+          }
 
     /* Desktop: grid */
     @media(min-width:820px){
