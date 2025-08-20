@@ -450,23 +450,37 @@
     // overlay logic
     const overlay = document.getElementById('overlay');
     const priceContent = document.getElementById('price-content');
-    async function openPrices(productName=null){
-      overlay.setAttribute('aria-hidden','false'); overlay.classList.add('show');
-      const data = await loadPrices();
-      if(!data){ priceContent.innerHTML = '<p style="color:#c33">Failed to load prices.</p>'; return }
-      if(productName){
-        const product = data.products.find(p => p.name.toLowerCase().includes(productName.toLowerCase()));
-        if(!product){ priceContent.innerHTML = '<p>Product not found in price list.</p>'; return }
-        let html = `<p style="margin:8px 0 6px"><strong>${product.name}</strong></p>`;
-        html += '<table class="price-table"><thead><tr><th>50g</th><th>100g</th><th>200g</th><th>500g</th><th>1kg</th></tr></thead><tbody>';
-        html += `<tr><td>${product['50g']}</td><td>${product['100g']}</td><td>${product['200g']}</td><td>${product['500g']}</td><td>${product['1kg']}</td></tr>`;
-        html += '</tbody></table>';
-        priceContent.innerHTML = html;
-      }else{
-        priceContent.innerHTML = renderPriceTable(data);
-      }
-    }
-
+                  async function openPrices(productName=null){
+                    overlay.setAttribute('aria-hidden','false'); overlay.classList.add('show');
+                    const data = await loadPrices();
+                    if(!data){ priceContent.innerHTML = '<p style="color:#c33">Failed to load prices.</p>'; return }
+                    if(productName){
+                      const product = data.products.find(p => p.name.toLowerCase().includes(productName.toLowerCase()));
+                      if(!product){ priceContent.innerHTML = '<p>Product not found in price list.</p>'; return }
+                      
+                      // --- START OF MODIFICATION ---
+                      // Instead of a table, create a more responsive layout for a single product
+                      let html = `<h4 style="margin:8px 0 12px; text-align:center;">${product.name}</h4>`;
+                      html += '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; text-align: center;">';
+                      
+                      const weights = ['50g', '100g', '200g', '500g', '1kg'];
+                      weights.forEach(weight => {
+                        if(product[weight]) {
+                          html += `<div>
+                                      <div style="font-size: 0.9em; color: var(--muted);">${weight}</div>
+                                      <div style="font-weight: 700; font-size: 1.1em;">${product[weight]}</div>
+                                   </div>`;
+                        }
+                      });
+                      
+                      html += '</div>';
+                      // --- END OF MODIFICATION ---
+                  
+                      priceContent.innerHTML = html;
+                    }else{
+                      priceContent.innerHTML = renderPriceTable(data);
+                    }
+                  }
     document.getElementById('open-prices').addEventListener('click',()=>openPrices());
     document.getElementById('close-overlay').addEventListener('click',()=>{overlay.classList.remove('show');overlay.setAttribute('aria-hidden','true')});
     overlay.addEventListener('click',(e)=>{ if(e.target===overlay){ overlay.classList.remove('show');overlay.setAttribute('aria-hidden','true') } });
