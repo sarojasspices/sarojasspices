@@ -170,12 +170,41 @@
     .price-table thead th{background:var(--brand);color:white;font-weight:700}
     .product-name-left{text-align:left;padding-left:12px;font-weight:700}
 
-    /* Testimonials */
-    .testimonials-grid{display:grid;grid-template-columns:1fr;gap:12px}
-    .test-card{background:var(--card);padding:12px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.05)}
-    .test-card p{margin:0;color:var(--muted);font-style:italic}
-    .test-card strong{display:block;margin-top:8px;color:var(--text)}
-    @media(min-width:900px){.testimonials-grid{grid-template-columns:repeat(3,1fr)}}
+            /* Testimonials - Modified */
+              .testimonials-grid {
+                /* Initial state for horizontal scroll */
+                display: flex;
+                gap: 12px;
+                overflow: hidden; /* This hides the reviews that are out of view */
+                /* Use a wrapper for the actual animation */
+              }
+              .test-card {
+                background: var(--card);
+                padding: 12px;
+                border-radius: 10px;
+                box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+                min-width: 33.33%; /* Shows 3 cards at a time on desktop */
+                flex-shrink: 0;
+                scroll-snap-align: start;
+              }
+              .test-card p{margin:0;color:var(--muted);font-style:italic}
+              .test-card strong{display:block;margin-top:8px;color:var(--text)}
+          
+              /* Mobile: Vertical scroll and fill width */
+              @media(max-width:900px){
+                .testimonials-grid {
+                  display: block; /* Revert to block layout */
+                  height: 400px; /* Adjust height as needed */
+                  overflow-y: scroll; /* Enable vertical scroll */
+                  -webkit-overflow-scrolling: touch;
+                  scroll-snap-type: y mandatory;
+                }
+                .test-card {
+                  margin-bottom: 12px;
+                  min-width: auto;
+                  scroll-snap-align: start;
+                }
+              }
 
     .contact-grid{display:grid;grid-template-columns:1fr;gap:12px}
     @media(min-width:900px){.contact-grid{grid-template-columns:1.2fr 1fr}}
@@ -348,17 +377,54 @@
     </div>
   </section>
 
-  <!-- Testimonials -->
-  <section id="testimonials" class="section">
-    <div class="wrap">
-      <h2>What Our Customers Say</h2>
-      <div class="testimonials-grid reveal">
-        <div class="test-card"><p>"Sarojasspices products are always fresh and full of flavor. My family loves the sambar masala!"</p><strong>— Anita D.</strong></div>
-        <div class="test-card"><p>"Quality you can taste. The peanut chutney adds a perfect punch to every meal."</p><strong>— Ravi K.</strong></div>
-        <div class="test-card"><p>"Great packaging and genuine spices. Highly recommended!"</p><strong>— Sneha P.</strong></div>
-      </div>
-    </div>
-  </section>
+                <!-- Testimonials -->
+              <section id="testimonials" class="section">
+                  <div class="wrap">
+                    <h2>What Our Customers Say</h2>
+                    <div class="testimonials-grid reveal" id="testimonials-scroller">
+                      <div class="test-card">
+                        <p>"Sarojasspices products are always fresh and full of flavor. My family loves the sambar masala!"</p>
+                        <strong>— Anita D.</strong>
+                      </div>
+                      <div class="test-card">
+                        <p>"Quality you can taste. The peanut chutney adds a perfect punch to every meal."</p>
+                        <strong>— Ravi K.</strong>
+                      </div>
+                      <div class="test-card">
+                        <p>"Great packaging and genuine spices. Highly recommended!"</p>
+                        <strong>— Sneha P.</strong>
+                      </div>
+                      <div class="test-card">
+                        <p>"The Ghati Masala is a game-changer! My curries have never tasted this good."</p>
+                        <strong>— Priyanka S.</strong>
+                      </div>
+                      <div class="test-card">
+                        <p>"Loved the Kala Masala. It's so authentic and adds a deep, rich flavor to my Maharashtrian dishes."</p>
+                        <strong>— Rohan M.</strong>
+                      </div>
+                      <div class="test-card">
+                        <p>"The Jawas Chutney is a must-have. It’s spicy and flavorful, perfect with my daily meals."</p>
+                        <strong>— Lakshmi V.</strong>
+                      </div>
+                      <div class="test-card">
+                        <p>"Finally found a place for genuine homemade spices. The quality and taste are unmatched."</p>
+                        <strong>— Vikram P.</strong>
+                      </div>
+                      <div class="test-card">
+                        <p>"The Dry Peanut Chutney is delicious and so versatile. I use it with everything."</p>
+                        <strong>— Pooja T.</strong>
+                      </div>
+                      <div class="test-card">
+                        <p>"Ordered multiple times and the quality is consistently excellent. Fast delivery too!"</p>
+                        <strong>— Sameer A.</strong>
+                      </div>
+                      <div class="test-card">
+                        <p>"Highly impressed with the freshness of these spices. Saroja's Spices is my new go-to."</p>
+                        <strong>— Anjali R.</strong>
+                      </div>
+                    </div>
+                  </div>
+              </section>
 
   <!-- Pricing (button opens modal) -->
   <section id="pricing" class="section">
@@ -414,6 +480,39 @@
   </div>
 
   <script>
+
+            // Add this to your existing <script> block
+                
+                // Auto-scroll testimonials on desktop
+                function setupTestimonialScroll() {
+                  const scroller = document.getElementById('testimonials-scroller');
+                  if (!scroller) return;
+            
+                  const cards = scroller.querySelectorAll('.test-card');
+                  const cardWidth = cards[0].offsetWidth + 12; // Card width + gap
+                  let scrollIndex = 0;
+            
+                  // Only enable auto-scroll on desktop
+                  if (window.innerWidth >= 900) {
+                    setInterval(() => {
+                      scrollIndex++;
+                      // If we reach the end, loop back to the beginning
+                      if (scrollIndex >= cards.length - 2) { // -2 to ensure smooth loop back
+                        scroller.scrollLeft = 0;
+                        scrollIndex = 0;
+                      } else {
+                        scroller.scrollLeft = scrollIndex * cardWidth;
+                      }
+                    }, 1250); // 1250ms = 1.25 seconds
+                  }
+                }
+                
+                // Call the function on page load
+                window.addEventListener('load', setupTestimonialScroll);
+                // Re-run on resize to handle layout changes
+                window.addEventListener('resize', setupTestimonialScroll);
+    
+    
     // footer year
     document.getElementById('yr').textContent = new Date().getFullYear();
 
