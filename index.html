@@ -29,15 +29,15 @@
       position:relative;
       background:white;
       border-bottom:1px solid rgba(0,0,0,0.06);
-      padding:6px 0; /* reduced height */
+      padding:10px 0;
       z-index:80;
     }
     .header-center{
       display:flex;
       align-items:center;
       justify-content:center;
-      gap:8px;
-      max-height:130%; /* height capped relative to image */
+      gap:10px;
+      min-height:46px;
     }
     .fssai-logo{
       height:36px; width:auto; display:block;
@@ -61,7 +61,6 @@
       align-items:center;
       padding:8px 12px;
       gap:12px;
-      flex-wrap:nowrap;
     }
     .nav-ribbon a{
       display:inline-block;
@@ -69,7 +68,6 @@
       border-radius:10px;
       font-weight:600;
       color:var(--muted);
-      white-space:nowrap; /* ensures one line only */
     }
     .nav-ribbon a:hover{background:rgba(0,0,0,0.04)}
     .nav-ribbon a.active{background:var(--brand);color:white}
@@ -90,15 +88,15 @@
     .section{padding:22px 0}
     .section h2{font-size:1.1rem;margin:0 0 12px}
 
-    /* Product showcase */
+    /* Product showcase - mobile first */
     .products-scroll{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
-    .product-card{min-width:68%;flex:0 0 68%;background:var(--card);border-radius:12px;padding:10px;box-shadow:0 8px 24px rgba(0,0,0,0.06);scroll-snap-align:center;display:flex;flex-direction:column;justify-content:space-between;height:320px}
-    .product-card img{border-radius:10px;height:150px;object-fit:contain;margin:auto} /* centered image */
-    .product-name{font-weight:700;margin:8px 0 6px;text-align:center}
-    .product-desc{font-size:0.95rem;color:var(--muted);margin-bottom:8px;text-align:center;flex:1}
-    .product-actions{display:flex;gap:8px;align-items:center;justify-content:center;margin-top:auto}
+    .product-card{min-width:68%;flex:0 0 68%;background:var(--card);border-radius:12px;padding:10px;box-shadow:0 8px 24px rgba(0,0,0,0.06);scroll-snap-align:center}
+    .product-card img{border-radius:10px;height:150px;object-fit:cover}
+    .product-name{font-weight:700;margin:8px 0 6px}
+    .product-desc{font-size:0.95rem;color:var(--muted);margin-bottom:8px}
+    .product-actions{display:flex;gap:8px;align-items:center}
 
-    /* Desktop grid */
+    /* Desktop: grid */
     @media(min-width:820px){
       .hero-right{width:340px;height:220px}
       .hero-right img{height:220px}
@@ -135,13 +133,19 @@
     .reveal{opacity:0;transform:translateY(16px);transition:all .6s cubic-bezier(.2,.9,.3,1)}
     .reveal.show{opacity:1;transform:none}
 
-    @media(max-width:700px){.hero-right{display:none}.fssai-logo{height:34px}}
+    /* small screens tweaks */
+    @media(max-width:700px){
+      .hero-right{display:none}
+      .fssai-logo{height:34px}
+    }
+
+    /* small accessibility focus outline */
     button:focus, a:focus { outline: 3px solid rgba(0,0,0,0.08); outline-offset: 2px; }
   </style>
 </head>
 <body>
 
-  <!-- HEADER: centered FSSAI -->
+  <!-- HEADER: centered FSSAI (no brand block) -->
   <header>
     <div class="header-center">
       <img class="fssai-logo" src="images/fssai.png" alt="FSSAI logo">
@@ -149,7 +153,7 @@
     </div>
   </header>
 
-  <!-- sticky navigation ribbon -->
+  <!-- sticky navigation ribbon (frozen) -->
   <div class="nav-ribbon" role="navigation" aria-label="Primary navigation">
     <a href="#home">Home</a>
     <a href="#products">Our Special</a>
@@ -180,24 +184,234 @@
       <h2>Our Special</h2>
 
       <div class="products-scroll reveal" id="products-scroll">
-        <!-- product cards unchanged -->
+        <article class="product-card" data-prod="Ghati Masala">
+          <img src="images/ghati.jpg" alt="Ghati Masala" align="center">
+          <div class="product-name">Ghati Masala</div>
+          <div class="product-desc">Used in many family recipes — warm & aromatic.</div>
+          <div class="product-actions">
+            <button class="btn" data-action="prices" data-name="Ghati Masala">See Prices</button>
+            <div class="pill" style="background:var(--accent);padding:6px 8px;border-radius:8px;font-weight:700">Best Seller</div>
+          </div>
+        </article>
+
+        <article class="product-card" data-prod="Ghoda (Kala) Masala">
+          <img src="images/ghoda.jpg" alt="Ghoda Masala" align="center">
+          <div class="product-name">Ghoda/Kala Masala</div>
+          <div class="product-desc">Robust, earthy spice blend for rich dishes.</div>
+          <div class="product-actions">
+            <button class="btn" data-action="prices" data-name="Ghoda/Kala Masala">See Prices</button>
+            <div class="pill" style="background:var(--accent);padding:6px 8px;border-radius:8px;font-weight:700">Traditional</div>
+          </div>
+        </article>
+
+        <article class="product-card" data-prod="Sambhar Masala">
+          <img src="images/sambar.jpg" alt="Sambhar Masala" align="center">
+          <div class="product-name">Sambhar Masala</div>
+          <div class="product-desc">Soul of the delicacy — make every sambhar sing.</div>
+          <div class="product-actions">
+            <button class="btn" data-action="prices" data-name="Sambhar Masala">See Prices</button>
+            <div class="pill" style="background:var(--accent);padding:6px 8px;border-radius:8px;font-weight:700">Classic</div>
+          </div>
+        </article>
+
+        <article class="product-card" data-prod="Jawas Chutney">
+          <img src="images/jawas.jpg" alt="Jawas Chutney" align="center">
+          <div class="product-name">Jawas Chutney</div>
+          <div class="product-desc">Aromatic chutney powder — bright & tangy sidekick.</div>
+          <div class="product-actions">
+            <button class="btn" data-action="prices" data-name="Jawas Chutney">See Prices</button>
+            <div class="pill" style="background:var(--accent);padding:6px 8px;border-radius:8px;font-weight:700">Fresh</div>
+          </div>
+        </article>
+
+        <article class="product-card" data-prod="Dry Peanut Chutney">
+          <img src="images/peanut.jpg" alt="Dry Peanut Chutney" align="center">
+          <div class="product-name">Dry Peanut Chutney</div>
+          <div class="product-desc">Crunchy, nutty, and perfect with dosa/idli.</div>
+          <div class="product-actions">
+            <button class="btn" data-action="prices" data-name="Dry Peanut Chutney">See Prices</button>
+            <div class="pill" style="background:var(--accent);padding:6px 8px;border-radius:8px;font-weight:700">Tasty</div>
+          </div>
+        </article>
       </div>
+
+      <!-- (desktop grid will be generated automatically by JS when wider screen) -->
       <div class="card-grid" style="display:none;margin-top:18px"></div>
     </div>
   </section>
 
-  <!-- Pricing -->
+  <!-- Testimonials -->
+  <section id="testimonials" class="section">
+    <div class="wrap">
+      <h2>What Our Customers Say</h2>
+      <div class="testimonials-grid reveal">
+        <div class="test-card"><p>"Sarojasspices products are always fresh and full of flavor. My family loves the sambar masala!"</p><strong>— Anita D.</strong></div>
+        <div class="test-card"><p>"Quality you can taste. The peanut chutney adds a perfect punch to every meal."</p><strong>— Ravi K.</strong></div>
+        <div class="test-card"><p>"Great packaging and genuine spices. Highly recommended!"</p><strong>— Sneha P.</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing (button opens modal) -->
   <section id="pricing" class="section">
     <div class="wrap">
       <h2>Prices</h2>
-      <p style="color:var(--muted)"><strong>Curious about our blends?</strong> Tap “See Prices” on any product — or sneak a look at the full list below 👀</p>
+      <p style="color:var(--muted)">Tap "See Prices" on any product to view its prices. Or open the full list below.</p>
       <div style="margin-top:12px">
         <button class="btn" id="open-prices">Open Full Price List</button>
       </div>
     </div>
   </section>
 
-  <!-- rest of body unchanged -->
+  <!-- Contact -->
+  <section id="contact" class="section">
+    <div class="wrap contact-grid">
+      <div>
+        <h2>Contact & Visit</h2>
+        <p style="color:var(--muted)">203, Rubiyana Residency, Behind HP Petrol Pump, Katrap, Badlapur East 421503</p>
+        <p style="margin-top:8px"><strong>Phone:</strong> <a href="tel:+919820542750">982-054-2750</a></p>
+        <p><strong>Email:</strong> <a href="mailto:sarojasspices@gmail.com">sarojasspices@gmail.com</a></p>
+        <div style="margin-top:12px;display:flex;gap:8px">
+          <a class="btn" href="https://wa.me/919820542750" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="btn outline" href="https://instagram.com/sarojasspices/" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+      <div class="map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d676.6532999654754!2d73.22593676774596!3d19.173559943215288!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be793a0b8234fcb%3A0xd47b7c5637ba0fa8!2sSaroja&#39;s%20Spices!5e0!3m2!1sen!2sin!4v1755562974235!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
 
+  <footer>
+    <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;padding:14px 0">
+      <div>© <span id="yr"></span> Saroja’s Spices</div>
+      <div style="color:var(--muted)">Made with ♥ in Badlapur</div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp -->
+  <a class="whatsapp-float" href="https://wa.me/919820542750" target="_blank" aria-label="WhatsApp">
+    <img src="images/whatsapp.png" alt="WhatsApp">
+  </a>
+
+  <!-- Price modal overlay -->
+  <div id="overlay" class="overlay" role="dialog" aria-hidden="true">
+    <div class="modal" role="document" aria-modal="true">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+        <h3 style="margin:0">Price List</h3>
+        <button class="close" id="close-overlay" aria-label="Close">✕</button>
+      </div>
+      <div id="price-content">Loading...</div>
+    </div>
+  </div>
+
+  <script>
+    // footer year
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    // reveal-on-scroll
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting) e.target.classList.add('show');
+      });
+    },{threshold:0.12});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+    // prices.json loader
+    let PRICES = null;
+    async function loadPrices(){
+      if(PRICES) return PRICES;
+      try{
+        const res = await fetch('prices.json');
+        PRICES = await res.json();
+        return PRICES;
+      }catch(err){ console.error('prices.json load failed',err); return null }
+    }
+
+    function renderPriceTable(data){
+      if(!data || !data.products) return '<p style="color:#c33">Price data unavailable</p>';
+      const ths = ['Products','50g','100g','200g','500g','1kg'];
+      let html = '<div style="overflow:auto"><table class="price-table"><thead><tr>'+ths.map(t=>`<th>${t}</th>`).join('')+'</tr></thead><tbody>';
+      data.products.forEach(p=>{
+        html += `<tr><td class="product-name-left">${p.name}</td><td>${p['50g']}</td><td>${p['100g']}</td><td>${p['200g']}</td><td>${p['500g']}</td><td>${p['1kg']}</td></tr>`;
+      });
+      html += '</tbody></table></div>';
+      return html;
+    }
+
+    // overlay logic
+    const overlay = document.getElementById('overlay');
+    const priceContent = document.getElementById('price-content');
+    async function openPrices(productName=null){
+      overlay.setAttribute('aria-hidden','false'); overlay.classList.add('show');
+      const data = await loadPrices();
+      if(!data){ priceContent.innerHTML = '<p style="color:#c33">Failed to load prices.</p>'; return }
+      if(productName){
+        const product = data.products.find(p => p.name.toLowerCase().includes(productName.toLowerCase()));
+        if(!product){ priceContent.innerHTML = '<p>Product not found in price list.</p>'; return }
+        let html = `<p style="margin:8px 0 6px"><strong>${product.name}</strong></p>`;
+        html += '<table class="price-table"><thead><tr><th>50g</th><th>100g</th><th>200g</th><th>500g</th><th>1kg</th></tr></thead><tbody>';
+        html += `<tr><td>${product['50g']}</td><td>${product['100g']}</td><td>${product['200g']}</td><td>${product['500g']}</td><td>${product['1kg']}</td></tr>`;
+        html += '</tbody></table>';
+        priceContent.innerHTML = html;
+      }else{
+        priceContent.innerHTML = renderPriceTable(data);
+      }
+    }
+
+    document.getElementById('open-prices').addEventListener('click',()=>openPrices());
+    document.getElementById('close-overlay').addEventListener('click',()=>{overlay.classList.remove('show');overlay.setAttribute('aria-hidden','true')});
+    overlay.addEventListener('click',(e)=>{ if(e.target===overlay){ overlay.classList.remove('show');overlay.setAttribute('aria-hidden','true') } });
+    document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && overlay.classList.contains('show')){ overlay.classList.remove('show'); overlay.setAttribute('aria-hidden','true'); } });
+
+    // attach See Prices buttons
+    function attachPriceButtons(scope=document){
+      scope.querySelectorAll('[data-action="prices"]').forEach(btn=>{
+        btn.addEventListener('click',()=>{
+          const name = btn.getAttribute('data-name') || btn.closest('.product-card').dataset.prod;
+          openPrices(name);
+        });
+      });
+    }
+    attachPriceButtons();
+
+    // responsive: clone to grid on larger screens
+    function upgradeGrid(){
+      const grid = document.querySelector('.card-grid');
+      const scrollArea = document.querySelector('.products-scroll');
+      if(window.innerWidth>=820){
+        if(grid && grid.children.length===0){
+          document.querySelectorAll('.product-card').forEach(card=>{
+            const clone = card.cloneNode(true);
+            grid.appendChild(clone);
+          });
+          grid.style.display='grid';
+          grid.style.gridTemplateColumns='repeat(5,1fr)';
+          scrollArea.style.display='none';
+          attachPriceButtons(grid); // attach events for cloned buttons
+        }
+      }else{
+        if(grid) grid.style.display='none';
+        scrollArea.style.display='flex';
+      }
+    }
+    window.addEventListener('resize',upgradeGrid);
+    upgradeGrid();
+
+    // highlight active nav link on scroll (simple)
+    const navLinks = document.querySelectorAll('.nav-ribbon a');
+    const sections = ['home','products','pricing','contact'].map(id=>document.getElementById(id));
+    function onScroll(){
+      const y = window.scrollY + 120;
+      let activeIndex = 0;
+      sections.forEach((sec,i)=>{
+        if(sec && sec.offsetTop <= y) activeIndex = i;
+      });
+      navLinks.forEach((a, i)=> a.classList.toggle('active', i===activeIndex));
+    }
+    window.addEventListener('scroll', onScroll);
+    onScroll();
+
+  </script>
 </body>
 </html>
