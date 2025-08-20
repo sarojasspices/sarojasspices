@@ -76,6 +76,23 @@
     .nav-ribbon a:hover{background:rgba(0,0,0,0.04)}
     .nav-ribbon a.active{background:var(--brand);color:white}
 
+
+        /*
+          This targets the sections you are linking to by their IDs.
+          The value should be equal to the height of your nav bar.
+          Let's calculate the height.
+          Padding: 8px (top) + 8px (bottom) = 16px
+          So, the total height is approximately 36px based on a standard font size.
+          We will use a slightly larger value to be safe.
+        */
+        #home,
+        #products,
+        #pricing,
+        #contact {
+          scroll-margin-top: 50px; /* Adjust this value to be slightly larger than your nav bar's height */
+        }
+
+    
     /* HERO */
     .hero{background:linear-gradient(180deg,var(--brand),var(--accent));color:#1a130f;padding:28px 0 22px;border-bottom-left-radius:18px;border-bottom-right-radius:18px}
     .hero-inner{display:flex;gap:18px;align-items:center;max-width:var(--container);margin:0 auto;padding:0 16px}
